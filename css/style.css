@@ -1,0 +1,1447 @@
+:root {
+    --bg: #FDFBF7;
+    --surface: #FFFFFF;
+    --text: #2C221E;
+    --muted: #7A6B63;
+    --border: #E8DED3;
+    --primary: #A34838;
+    --primary-hover: #8A3B2D;
+    --soft: #F4EBE1;
+    --accent-glow: rgba(163, 72, 56, 0.12);
+    --radius: 14px;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --surface: #1e1e1e;
+    --text: #ffffff;       /* Целосно бел текст за максимален контраст */
+    --muted: #d1d5db;      /* Светла сива боја за описите за да се читаат совршено */
+    --border: #333333;
+    --primary: #D16B58;
+    --primary-hover: #E27E6C;
+    --soft: #25201D;
+    --accent-glow: rgba(209, 107, 88, 0.2);
+}
+
+/* Пример како треба да изгледаат променливите за темната тема */
+.dark-theme, [data-theme="dark"] {
+    --bg: #121212;
+    --surface: #1e1e1e;
+    --text: #ffffff;       /* Главниот текст целосно бел за максимален контраст */
+    --muted: #d1d5db;      /* Променето од темно сива во светла сива (light gray) за совршен контраст */
+    --border: #333333;
+}
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: var(--transition);
+    position: relative;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+
+[data-theme="dark"] body::before {
+    opacity: 0.07;
+}
+
+@keyframes floatBackground {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(35px) rotate(4deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+a { text-decoration: none; color: inherit; cursor: pointer; }
+ul, ol { list-style: none; }
+
+
+main {
+    padding-top: 50px;
+}
+
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Loader */
+.loader { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s ease; }
+.loader-inner { text-align: center; }
+.loader-flower { font-size: 44px; color: var(--primary); animation: spin 2s infinite linear; margin-bottom: 10px; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Header & Navbar */
+.header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    background-color: var(--surface);
+}
+
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.logo { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; animation: fadeInDown 0.6s ease; cursor: pointer; }
+.logo span { color: var(--primary); }
+
+.nav { display: flex; align-items: center; gap: 24px; font-size: 15px; font-weight: 500; }
+.nav > a, .dropdown > a { position: relative; padding: 8px 0; transition: var(--transition); cursor: pointer; }
+.nav > a:hover, .dropdown > a:hover { color: var(--primary); }
+
+/* Dropdown */
+.dropdown { position: relative; cursor: pointer; }
+.dropdown-menu { position: absolute; top: 100%; left: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 14px 35px var(--accent-glow); padding: 10px 0; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); z-index: 100; }
+.dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-menu a { display: block; padding: 10px 20px; font-size: 14px; color: var(--text); transition: var(--transition); cursor: pointer; }
+.dropdown-menu a:hover { background: var(--soft); color: var(--primary); padding-left: 24px; }
+
+/* Акции горе */
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.nav-action-btn { background: var(--soft); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: var(--transition); text-decoration: none; }
+.nav-action-btn:hover { background: var(--primary); color: #FFFFFF; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 16px var(--accent-glow); }
+.icon-btn { width: 40px; height: 40px; padding: 0; border-radius: 50%; font-size: 16px; cursor: pointer; }
+
+/* Footer */
+.footer { background: var(--surface); border-top: 1px solid var(--border); padding: 60px 0; margin-top: 80px; transition: var(--transition); }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+.footer h3 { font-size: 20px; margin-bottom: 12px; }
+.footer h3 span { color: var(--primary); }
+.footer h4 { font-size: 16px; margin-bottom: 16px; }
+.footer a { display: block; color: var(--muted); margin-bottom: 8px; font-size: 14px; transition: var(--transition); cursor: pointer; }
+.footer a:hover { color: var(--primary); transform: translateX(4px); }
+
+/* Buttons & Forms */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: var(--radius); font-weight: 500; font-size: 15px; cursor: pointer; transition: var(--transition); border: none; text-decoration: none; }
+.btn-dark { background: var(--text); color: var(--surface); cursor: pointer; }
+.btn-dark:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 18px var(--accent-glow); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); cursor: pointer; }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+
+.glass-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; transition: var(--transition); animation: fadeInUp 0.6s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+input, select, textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-family: inherit; font-size: 15px; margin-bottom: 16px; transition: var(--transition); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--accent-glow); }
+
+/* Анимации */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero { padding: 80px 0; animation: fadeInUp 0.8s ease; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.hero-copy h1 { font-size: 52px; line-height: 1.1; font-weight: 700; margin: 16px 0; letter-spacing: -1px; }
+.hero-copy p { color: var(--muted); font-size: 18px; margin-bottom: 30px; }
+
+.page-hero { padding: 60px 0; background: var(--soft); border-bottom: 1px solid var(--border); margin-bottom: 40px; transition: var(--transition); animation: fadeInDown 0.6s ease; }
+.section { padding: 60px 0; animation: fadeInUp 0.8s ease; }
+.section-soft { background: var(--soft); }
+
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.product-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: var(--transition); }
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 14px 35px rgba(0,0,0,0.08); border-color: var(--primary); }
+.product-image img { width: 100%; height: 300px; object-fit: cover; transition: var(--transition); }
+.product-card:hover .product-image img { transform: scale(1.04); }
+.product-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+
+.mini-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 24px 0; display: flex; justify-content: space-around; text-align: center; }
+.mini strong { display: block; font-size: 24px; font-weight: 700; color: var(--primary); }
+.mini span { font-size: 13px; color: var(--muted); text-transform: uppercase; }
+
+/* Cookie Banner */
+.cookie-banner { position: fixed; bottom: 20px; right: 20px; background: var(--surface); border: 1px solid var(--border); padding: 24px; border-radius: var(--radius); box-shadow: 0 15px 40px rgba(0,0,0,0.15); z-index: 9999; display: none; max-width: 380px; animation: fadeInUp 0.5s ease; }
+.cookie-banner p { font-size: 14px; margin-bottom: 16px; color: var(--muted); }
+.cookie-actions { display: flex; gap: 10px; }
+.cookie-actions button { padding: 8px 14px; font-size: 13px; border-radius: 8px; border: 1px solid var(--border); background: transparent; cursor: pointer; transition: var(--transition); font-weight: 500; color: var(--text); }
+.cookie-actions button:hover { background: var(--soft); }
+.cookie-actions button.accept { background: var(--primary); color: #fff; border-color: var(--primary); }
+.cookie-actions button.accept:hover { background: var(--primary-hover); }
+
+/* Категории (Pills) & Mood */
+.category-pills { display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+.pill-card { background: var(--surface); border: 1px solid var(--border); padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 14px; color: var(--text); transition: var(--transition); display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.pill-card:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 20px var(--accent-glow); }
+
+.mood-section { background: var(--soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px 0; margin: 60px 0; text-align: center; }
+.mood-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 30px; }
+.mood-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; border-radius: var(--radius); cursor: pointer; transition: var(--transition); }
+.mood-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+.mood-card h4 { font-size: 16px; margin-bottom: 8px; color: var(--primary); }
+.mood-card p { font-size: 13px; color: var(--muted); }
+
+/* FAQ Стилизација */
+.faq-hero { text-align: center; max-width: 700px; margin: 0 auto 40px auto; }
+.faq-container { max-width: 800px; margin: 0 auto; }
+.faq-category-title { font-size: 18px; font-weight: 700; color: var(--primary); margin: 30px 0 15px 0; display: flex; align-items: center; gap: 8px; }
+.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; transition: var(--transition); }
+.faq-item:hover { border-color: var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+.faq-question { width: 100%; background: none; border: none; padding: 20px; text-align: left; font-size: 16px; font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; font-family: inherit; transition: var(--transition); }
+.faq-question span.icon { font-size: 18px; color: var(--primary); transition: transform 0.3s ease; }
+.faq-item.active .faq-question span.icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; padding: 0 20px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px 20px; }
+.faq-help-box { background: var(--soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; text-align: center; margin-top: 50px; }
+.faq-help-box h3 { margin-bottom: 8px; }
+.faq-help-box p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+/* Модали и Поп-ап */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; visibility: hidden; transition: var(--transition); }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 35px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); transform: translateY(20px) scale(0.95); transition: var(--transition); }
+.modal-overlay.active .modal-box { transform: translateY(0) scale(1); }
+.modal-icon { font-size: 50px; color: var(--primary); margin-bottom: 12px; }
+.modal-box h3 { font-size: 22px; margin-bottom: 8px; color: var(--text); }
+.modal-box p { color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 24px; }
+
+/* Контакт распоред */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: start; }
+.contact-info-card { background: var(--soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; }
+.contact-info-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+.contact-info-item:last-child { margin-bottom: 0; }
+.contact-info-item span.icon { font-size: 20px; background: var(--surface); border: 1px solid var(--border); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-info-item h4 { font-size: 15px; margin-bottom: 3px; }
+.contact-info-item p { font-size: 14px; color: var(--muted); }
+
+/* Toast облаче */
+.toast-notification { position: fixed; bottom: 30px; right: 30px; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 14px 22px; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; z-index: 99999; opacity: 0; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
+.toast-notification.show { opacity: 1; transform: translateY(0); }
+.toast-notification span.icon { font-size: 18px; color: var(--primary); }
+
+/* Артикли во кошничката */
+.cart-item-row { display: flex; align-items: center; justify-content: space-between; background: var(--surface); border: 1px solid var(--border); padding: 16px; border-radius: var(--radius); margin-bottom: 12px; gap: 15px; transition: var(--transition); }
+.cart-item-row:hover { border-color: var(--primary); }
+.cart-item-info { flex-grow: 1; }
+.cart-item-info h4 { font-size: 16px; margin-bottom: 4px; }
+.cart-item-info p { color: var(--muted); font-size: 14px; }
+.cart-item-controls { display: flex; align-items: center; gap: 10px; }
+.qty-btn { background: var(--soft); border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; }
+.qty-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.remove-btn { background: transparent; border: none; color: #D96565; cursor: pointer; font-size: 14px; font-weight: 500; padding: 4px 8px; transition: var(--transition); }
+.remove-btn:hover { text-decoration: underline; }
+
+/* Checkout & Payment Grid */
+.checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+.checkout-section-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; margin-bottom: 25px; }
+.checkout-section-box h3 { font-size: 18px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+.payment-methods-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.payment-method-card { border: 2px solid var(--border); border-radius: var(--radius); padding: 18px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; transition: var(--transition); background: var(--surface); }
+.payment-method-card:hover { border-color: var(--primary); }
+.payment-method-card.selected { border-color: var(--primary); background: var(--soft); }
+.payment-method-card input[type="radio"] { accent-color: var(--primary); cursor: pointer; }
+.payment-method-header { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+.payment-method-card p { color: var(--muted); font-size: 13px; margin: 0; }
+
+.card-details-container { display: none; background: var(--soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-top: 15px; animation: fadeIn 0.3s ease-in-out; }
+.card-details-container.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+.card-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
+
+/* --- СТИЛОВИ ЗА БУКЕТ BUILDER --- */
+.builder-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.builder-steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.builder-step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.builder-step-card h3 {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.builder-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.builder-option-btn {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: inherit;
+    color: var(--text);
+}
+
+.builder-option-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--accent-glow);
+}
+
+.builder-option-btn.selected {
+    border-color: var(--primary);
+    background: var(--soft);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.builder-option-btn strong {
+    font-size: 14px;
+}
+
+.builder-option-btn span {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* Жив преглед (Live Preview Box) на букетот */
+.builder-preview-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px;
+    position: sticky;
+    top: 100px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.preview-canvas {
+    width: 100%;
+    height: 280px;
+    background: var(--soft);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px dashed var(--border);
+}
+
+.animated-bouquet {
+    font-size: 70px;
+    animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: var(--transition);
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.preview-details {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.preview-details div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.preview-details span.label {
+    color: var(--muted);
+}
+
+/* --- КОПЧЕ ЗА СКРОЛ ДО ГОРЕ --- */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 46px;
+    height: 46px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: var(--primary);
+    color: #FFFFFF;
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px var(--accent-glow);
+}
+
+/* --- ЧИСТА ЦВЕТНА ГАЛЕРИЈА --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 34, 30, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 15px;
+    text-align: center;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay .gallery-icon {
+    font-size: 24px;
+    color: #FFFFFF;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.gallery-overlay .gallery-title {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+    transform: translateY(10px);
+    transition: transform 0.3s ease 0.05s;
+}
+
+.gallery-overlay .gallery-sub {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    transform: translateY(10px);
+    transition: transform 0.3s ease 0.1s;
+}
+
+.gallery-item:hover .gallery-overlay .gallery-icon,
+.gallery-item:hover .gallery-overlay .gallery-title,
+.gallery-item:hover .gallery-overlay .gallery-sub {
+    transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+}
+
+@media (max-width: 500px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+}
+
+/* --- ФИЛТЕРИ И СЕАРЧ БАР --- */
+.shop-filters-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-bar-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-bar-container input {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+.search-bar-container input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    outline: none;
+}
+
+.search-bar-container .search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--muted);
+    pointer-events: none;
+}
+
+.filter-buttons-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-btn {
+    background: var(--soft);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: #FFFFFF;
+    border-color: var(--primary);
+    box-shadow: 0 6px 16px var(--accent-glow);
+}
+
+.shop-sort-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.shop-sort-container select {
+    width: auto;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* --- GIFT BUILDER --- */
+.gift-builder-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.gift-steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.gift-step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.gift-step-card h3 {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gift-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+.gift-option-btn {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: inherit;
+    color: var(--text);
+}
+
+.gift-option-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--accent-glow);
+}
+
+.gift-option-btn.selected {
+    border-color: var(--primary);
+    background: var(--soft);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.gift-option-btn strong {
+    font-size: 14px;
+}
+
+.gift-option-btn span {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.gift-preview-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px;
+    position: sticky;
+    top: 100px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.gift-preview-canvas {
+    width: 100%;
+    height: 280px;
+    background: var(--soft);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px dashed var(--border);
+}
+
+.animated-gift {
+    font-size: 70px;
+    animation: bounceInGift 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: var(--transition);
+}
+
+@keyframes bounceInGift {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.gift-preview-details {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.gift-preview-details div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gift-preview-details span.label {
+    color: var(--muted);
+}
+
+@media (max-width: 900px) {
+    .gift-builder-layout { grid-template-columns: 1fr; }
+    .gift-preview-box { position: static; }
+}
+
+/* ========================================================== */
+/* СТИЛОВИ ЗА СТРАНИЦАТА ПОДАРОЦИ И КАРТИЧКИ (ТЕМНА/СВЕТЛА ТЕМА) */
+/* ========================================================== */
+
+.gifts-page {
+    background-color: var(--bg);
+    min-height: 80vh;
+}
+
+/* Картички за производи со автоматска поддршка за темна/светла тема */
+.product-grid .product-card,
+.products-grid .product-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.product-grid .product-card:hover,
+.products-grid .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary);
+}
+
+.product-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    width: 100%;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.gift-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.product-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-body h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.product-body p,
+.product-body .card-description {
+    color: var(--muted);
+}
+
+.product-grid .product-card button,
+.products-grid .product-card button {
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+}
+
+/* Филтер копчиња */
+.gift-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.gift-filters .filter-btn {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.gift-filters .filter-btn:hover,
+.gift-filters .filter-btn.active {
+    background-color: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* Модал стилови */
+.product-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-modal.active {
+    display: flex;
+}
+
+.product-modal-content {
+    position: relative;
+    background: var(--surface);
+    color: var(--text);
+    width: min(900px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Cookie Banner Styling */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #eaeaea;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+    z-index: 9999;
+    padding: 20px;
+    animation: slideUp 0.4s ease;
+}
+
+.cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cookie-text h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.cookie-text p {
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+    max-width: 700px;
+}
+
+.cookie-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Modal Overlay Styling */
+.cookie-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.cookie-modal-box {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    animation: scaleUp 0.3s ease;
+}
+
+.cookie-option-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+
+
+/* ============================== */
+/* СТИЛОВИ ЗА МОДАЛ И КАРТИЧКИ    */
+/* ============================== */
+.product-grid .product-card {
+    cursor: pointer;
+}
+
+.product-grid .product-card button {
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.product-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-modal.active {
+    display: flex;
+}
+
+.product-modal-content {
+    position: relative;
+    background: #fff;
+    width: min(900px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.product-modal-image {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+    background: #f7f7f7;
+}
+
+.product-modal-description {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 18px 5px 5px;
+}
+
+.product-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    font-size: 28px;
+    line-height: 40px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.product-modal-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 600px) {
+    .product-modal {
+        padding: 10px;
+    }
+    .product-modal-content {
+        padding: 10px;
+        border-radius: 12px;
+    }
+    .product-modal-description {
+        font-size: 14px;
+        margin: 12px 3px 3px;
+    }
+}
+
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+
+/* ============================== */
+/* СТИЛОВИ ЗА ХАБУРГЕР МЕНИ       */
+/* ============================== */
+
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+@media (max-width: 992px) {
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--surface);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav.active {
+        display: flex !important;
+    }
+
+    /* Под-менито (dropdown) во мобилното мени да биде затворено по основно */
+    .nav .dropdown-menu {
+        display: none;
+        position: static;
+        box-shadow: none;
+        background: var(--soft);
+        padding-left: 15px;
+        margin-top: 5px;
+        border-radius: 6px;
+    }
+
+    /* Кога ќе се добие класата 'open', се спушта под-менито */
+    .nav .dropdown.open .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+
+
+/* ========================================================== */
+/* МОДАЛНИ ПРОЗОРЦИ И ТЕМНА ТЕМА                              */
+/* ========================================================== */
+
+/* Затемнетата позадина позади модалот (затемнувањето) */
+.product-modal,
+.modal-overlay,
+.cookie-modal-overlay {
+    background: rgba(0, 0, 0, 0.75); /* Иста затемнетост и за светло и за темно */
+    backdrop-filter: blur(5px);
+}
+
+/* Главната кутија на модалот */
+.product-modal-content,
+.modal-box,
+.cookie-modal-box {
+    background-color: var(--surface); /* Автоматски се менува во темна боја во темна тема */
+    color: var(--text);               /* Автоматски бел текст во темна тема */
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Насловите и текстовите внатре во модалот */
+.product-modal-content h2,
+.product-modal-content h3,
+.modal-box h3,
+.cookie-modal-box h3 {
+    color: var(--text);
+}
+
+.product-modal-description,
+.modal-box p,
+.cookie-modal-box p {
+    color: var(--muted); /* Светла сива боја во темна тема за одличен контраст на описот */
+}
+
+/* Позадина за сликата или иконата внатре во модалот */
+.product-modal-image {
+    background: var(--soft); /* Се прилагодува со лесна темна нијанса во темна тема */
+}
+
+/* Копчето за затворање (X) во модалот */
+.product-modal-close {
+    background: var(--soft);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.product-modal-close:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+
+/* Основен изглед на Cookie Banner (ветло / стандардно) */
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 450px;
+    background-color: var(--surface, #ffffff);
+    color: var(--text, #333333);
+    border: 1px solid var(--border, #e5e5e5);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    display: none; /* Се отвора автоматски преку JS ако нема избор */
+    animation: slideUp 0.3s ease-out;
+}
+
+.cookie-banner p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: var(--text, #333333);
+}
+
+
+.cookie-banner h4 {
+    color: #222222;
+}
+
+
+[data-theme="dark"] .cookie-banner h4 {
+    color: #ffffff;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cookie-actions button {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition, 0.2s);
+    border: 1px solid var(--border, #ccc);
+    background-color: transparent;
+    color: var(--text, #333333);
+}
+
+.cookie-actions button:hover {
+    opacity: 0.8;
+}
+
+.cookie-actions button.accept {
+    background-color: var(--primary, #d4af37);
+    color: #ffffff;
+    border-color: var(--primary, #d4af37);
+}
+
+/* Анимација за појавување */
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+.product-card {
+    cursor: pointer;
+}
+
+.product-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-modal.active {
+    display: flex;
+}
+
+.product-modal-content {
+    position: relative;
+    background: var(--surface, #fff);
+    color: var(--text, #000);
+    width: min(900px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.product-modal-image {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+    background: var(--soft, #f7f7f7);
+}
+
+.product-modal-description {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 18px 5px 5px;
+}
+
+.product-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    font-size: 28px;
+    line-height: 40px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.product-card button {
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Структура на галеријата за да нема поместувања */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Секоја картичка во галеријата има фиксна висина и заокружени рабови */
+.gallery-item {
+    position: relative;
+    height: 260px; /* Фиксна висина за сите слики да се исти */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--surface, #f7f7f7);
+}
+
+/* Сликата ја покрива целата рамка без бели линии и без реметење */
+.gallery-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;     /* Го пополнува целиот простор без празнини */
+    object-position: center !important; /* Го држи центарот во фокус */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Ефект на лесно зумирање кога ќе поминеш со глувчето */
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+
+
+
+
+#flowerCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Овозможува кликање низ канасот */
+    z-index: -1; /* Стои зад сите елементи */
+}
+
+/* Контејнерот каде што се наоѓа инпутот и иконата */
+.search-bar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Или колку што ти е потребно */
+    margin: 0 auto;
+}
+
+/* Иконата за пребарување (лупата) */
+.search-bar-container .search-icon {
+    position: absolute;
+    left: 15px; /* Растојание од левиот раб */
+    top: 57%;
+    transform: translateY(-50%);
+    z-index: 2;
+    font-size: 16px;
+    pointer-events: none; /* Овозможува кликање директно низ иконата */
+}
+
+/* Полето за внесување текст */
+.search-bar-container input[type="text"] {
+    width: 100%;
+    padding: 12px 15px 12px 45px !important; /* Клучниот дел: 45px лево за да има место за иконата */
+    font-size: 15px;
+    border: 1px solid var(--border);
+    border-radius: 30px; /* Заоблен изглед */
+    background-color: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: var(--transition);
+}
+
+/* Ефект при клик на инпутот */
+.search-bar-container input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+
+/* Центрирање на филтер копчињата */
+.filter-buttons-group,
+.gift-filters,
+#categoryFilters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}

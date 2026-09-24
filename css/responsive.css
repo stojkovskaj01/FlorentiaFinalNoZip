@@ -1,0 +1,690 @@
+@media (max-width: 992px) {
+    .hero-grid,
+    .builder-grid,
+    .footer-grid,
+    .product-grid,
+    .consultation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Категориите да бидат по 2 на ред на таблети */
+    .category-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Намалување на главниот наслов */
+    .hero-copy h1 {
+        font-size: 34px;
+    }
+
+
+    @media (max-width: 992px) {
+        /* Сите мрежи да се редат во една колона */
+        .hero-grid,
+        .builder-grid,
+        .footer-grid,
+        .product-grid,
+        .consultation-grid,
+        .products-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        /* Категориите да бидат по 2 на ред на таблети */
+        .category-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Намалување на главниот наслов */
+        .hero-copy h1,
+        .page-header h1 {
+            font-size: 28px !important;
+        }
+
+        /* Откоментирај го и среди го мобилното мени */
+        .nav {
+            display: none; /* Се отвора преку JavaScript со класа .active */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--surface, #fff);
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav.active {
+            display: flex;
+        }
+    }
+
+    /* Дополнителен breakpoint за ектремно мали телефони (под 576px) */
+    @media (max-width: 576px) {
+        .category-grid {
+            grid-template-columns: 1fr; /* На мн. мали телефони и категориите нека се 1 колона */
+        }
+
+        .hero-copy h1,
+        .page-header h1 {
+            font-size: 24px !important;
+        }
+
+        .container {
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+    }
+
+
+    /* Глобално центрирање и спречување на хоризонтален скрол */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        overflow-x: hidden; /* Спречува случајно мрдање на страницата лево-десно на мобилен */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Универзален центар за сите главни контејнери */
+    .container {
+        width: 100%;
+        max-width: 1200px; /* Максимална ширина за големи екрани */
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Центрирање на насловите и текстовите во херо секциите и хедерите на страниците */
+    .page-hero,
+    .page-header,
+    .faq-hero,
+    .section-header {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Центрирање на самите гридови (grids) во нивните контејнери */
+    .products-grid,
+    .category-grid,
+    .hero-grid,
+    .footer-grid {
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Центрирање на сликите во картичките за да не се искривуваат */
+    .product-card img,
+    .category-card img {
+        display: block;
+        margin: 0 auto;
+    }
+
+
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    img, video, canvas, svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    /* ========================================================== */
+    /* ДЕФИНИТИВНО РЕШЕНИЕ ЗА РЕСПОНЗИВНОСТ И МОБИЛНИ ЕКРАНИ        */
+    /* ========================================================== */
+    /* 1. Глобална заштита од хоризонтално мрдање и бегање во десно */
+    html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Сите елементи автоматски да ја почитуваат ширината на екранот */
+    *, *::before, *::after {
+        box-sizing: border-box !important;
+    }
+
+    /* Слики и медиуми никогаш да не ја надминат ширината */
+    img, video, canvas, svg, iframe, table {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Долги зборови и текстови да се скршуваат за да не прават хоризонтален скрол */
+    p, h1, h2, h3, h4, h5, h6, span, a, li {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* 2. Сите мрежи (grids) да се спуштат во ЕДНА КОЛОНА на мобилни и таблети */
+    @media (max-width: 992px) {
+        .hero-grid,
+        .builder-grid,
+        .gift-builder-layout,
+        .checkout-grid,
+        .contact-grid,
+        .footer-grid,
+        .product-grid,
+        .products-grid,
+        .consultation-grid {
+            grid-template-columns: 1fr !important;
+            gap: 25px !important;
+            width: 100% !important;
+        }
+
+        /* Категориите нека останат по 2 на ред на таблети */
+        .category-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+
+        /* Намалување на преголемите наслови на телефон */
+        .hero-copy h1 {
+            font-size: 32px !important;
+            line-height: 1.2 !important;
+        }
+
+        .container {
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+            width: 100% !important;
+        }
+    }
+
+    /* 3. За екстремно мали телефони (под 576px) */
+    @media (max-width: 576px) {
+        .category-grid,
+        .mood-grid,
+        .gallery-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .hero-copy h1 {
+            font-size: 26px !important;
+        }
+
+        /* Прилагодување на модалите да не излегуваат од екранот на мал телефон */
+        .product-modal-content,
+        .modal-box,
+        .cookie-modal-box {
+            width: 95% !important;
+            padding: 15px !important;
+            margin: 10px !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* ПОДОБРЕНО И ПОМАЛО ДИМЕНЗИОНИРАЊЕ ЗА МОБИЛНИ УРЕДИ        */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        body {
+            font-size: 13px !important;
+        }
+
+        h1 {
+            font-size: 22px !important;
+            line-height: 1.2 !important;
+        }
+
+        h2 {
+            font-size: 18px !important;
+        }
+
+        h3 {
+            font-size: 16px !important;
+        }
+
+        p, span, a, li, label {
+            font-size: 13px !important;
+        }
+
+        /* Намалување на полињата за внесување и копчињата */
+        input, select, textarea {
+            padding: 10px 12px !important;
+            font-size: 13px !important;
+            margin-bottom: 12px !important;
+        }
+
+        .btn {
+            padding: 10px 16px !important;
+            font-size: 13px !important;
+        }
+
+        /* Помали рамки во картичките за да не трошат простор */
+        .product-body,
+        .builder-step-card,
+        .gift-step-card,
+        .checkout-section-box,
+        .glass-form {
+            padding: 12px !important;
+        }
+
+        .section {
+            padding: 30px 0 !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        body {
+            font-size: 12.5px !important;
+        }
+
+        h1 {
+            font-size: 20px !important;
+        }
+
+        h2 {
+            font-size: 16px !important;
+        }
+
+        p, span, a, li {
+            font-size: 12.5px !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* ЧИСТ И ЕЛЕГАНТЕН МОБИЛЕН ДИЗАЈН (БЕЗ ГРДИ ДЕЛОВИ)          */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        /* 1. Нормализација на основниот изглед */
+        body {
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+        }
+
+        .container {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+        }
+
+        /* 2. Сите мрежи во 1 колона, чисти и центрирани */
+        .hero-grid,
+        .builder-grid,
+        .gift-builder-layout,
+        .checkout-grid,
+        .contact-grid,
+        .footer-grid,
+        .product-grid,
+        .products-grid,
+        .consultation-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+            width: 100% !important;
+        }
+
+        /* Категориите да останат уредни по 2 на ред на таблети */
+        .category-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+        }
+
+        /* 3. Наслови кои изгледаат пропорционално (не преголеми, не премали) */
+        .hero-copy h1 {
+            font-size: 28px !important;
+            line-height: 1.25 !important;
+            text-align: center;
+        }
+
+        .hero-copy p {
+            font-size: 14px !important;
+            text-align: center;
+        }
+
+        /* 4. Слики во картичките да се фиксирани и пропорционални */
+        .product-image img,
+        .gallery-item img {
+            width: 100% !important;
+            height: 220px !important;
+            object-fit: cover !important;
+        }
+
+        /* 5. Картите и формите да дишат рамномерно */
+        .product-card,
+        .builder-step-card,
+        .gift-step-card,
+        .checkout-section-box,
+        .glass-form {
+            width: 100% !important;
+            margin: 0 auto !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        /* 6. Копчиња и полиња со нормална мобилна големина */
+        .btn, input, select, textarea {
+            width: 100% !important;
+            font-size: 14px !important;
+            padding: 12px 16px !important;
+        }
+
+        /* 7. Филтер копчиња и пилули да се лизгаат хоризонтално или уредно подредат */
+        .gift-filters,
+        .category-pills,
+        .filter-buttons-group {
+            justify-content: center !important;
+            gap: 8px !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .category-grid,
+        .mood-grid {
+            grid-template-columns: 1fr !important; /* На тенки телефони сè во 1 колона */
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* СТРУКТУРИРАЊЕ НА ФУТЕРОТ И ФИНИШИРАЊЕ НА ФОНТОТ ЗА МОБИЛЕН */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        /* 1. Футер на мобилен: Чисто подредување во вертикална линија */
+        .footer {
+            padding: 40px 0 !important;
+            text-align: center !important; /* Центрирање на содржината за да изгледа уредно */
+        }
+
+        .footer-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 30px !important;
+            align-items: center !important;
+        }
+
+        .footer h3,
+        .footer h4 {
+            font-size: 16px !important;
+            margin-bottom: 10px !important;
+        }
+
+        .footer p,
+        .footer a {
+            font-size: 13.5px !important;
+            justify-content: center !important;
+        }
+
+        /* Ефект при ховер на линковите во футерот да не бегаат надесно на мобилен */
+        .footer a:hover {
+            transform: none !important;
+            color: var(--primary) !important;
+        }
+
+        /* 2. Оптимизација на општ фонт и читливост */
+        body {
+            font-size: 14px !important;
+            letter-spacing: -0.1px;
+        }
+
+        /* Да се осигураме дека текстовите во картичките не се премногу ситни ниту прекрупни */
+        .product-body h3,
+        .builder-step-card h3,
+        .gift-step-card h3 {
+            font-size: 16px !important;
+        }
+
+        .product-body p,
+        .builder-step-card span,
+        .gift-step-card span {
+            font-size: 13px !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .footer {
+            padding: 30px 15px !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* ЦЕЛОСЕН ПРИКАЗ НА СЛИКИТЕ БЕЗ ИСЕКУВАЊЕ НА МОБИЛЕН           */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        /* Опција 1: Ако сакаш сликата да се гледа ЦЕЛА во оригинална пропорција */
+        .product-image img,
+        .gallery-item img {
+            width: 100% !important;
+            height: auto !important; /* Автоматска висина за да не се сече ништо */
+            max-height: 280px !important; /* Максимална граница да не биде преголема */
+            object-fit: contain !important; /* Го прикажува целиот предмет/букет без искривување */
+            background: var(--soft) !important; /* Позадина околу сликата ако е со различни пропорции */
+        }
+
+        /* Истото за модалните слики */
+        .product-modal-image {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 50vh !important;
+            object-fit: contain !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* ОПТИМИЗАЦИЈА НА MINI-STRIP ЗА МОБИЛНИ УРЕДИ                */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        .mini-strip {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important; /* По 2 елементи на ред за да има воздух */
+            gap: 15px !important;
+            padding: 20px 15px !important;
+            text-align: center;
+        }
+
+        .mini strong {
+            font-size: 18px !important; /* Намален фонт за броевите */
+            margin-bottom: 2px !important;
+        }
+
+        .mini span {
+            font-size: 12px !important; /* Намален и читлив фонт за текстот */
+            line-height: 1.3 !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .mini-strip {
+            grid-template-columns: 1fr !important; /* На екстремно мали екрани се редат еден под друг */
+            gap: 12px !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* ОПТИМИЗАЦИЈА НА GIFT/BOUQUET BUILDER ЗА МОБИЛНИ УРЕДИ      */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        /* 1. Главен распоред: разделување на левиот дел (чекори) и десниот дел (преглед) */
+        .gift-builder-layout,
+        .builder-layout {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 25px !important;
+            width: 100% !important;
+        }
+
+        /* 2. Контејнер за чекорите со поголем растојание за да „дише“ */
+        .gift-steps-container,
+        .builder-steps-container {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+        }
+
+        /* 3. Картичките на чекорите */
+        .gift-step-card,
+        .builder-step-card {
+            padding: 18px !important;
+            border-radius: 12px !important;
+        }
+
+        .gift-step-card h3,
+        .builder-step-card h3 {
+            font-size: 15px !important;
+            margin-bottom: 12px !important;
+        }
+
+        /* 4. Гридовите со опциите за избор (цвет, боја, додатоци) */
+        .gift-options-grid,
+        .builder-options-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important; /* По 2 опции на ред за да се распоредат уредно */
+            gap: 10px !important;
+        }
+
+        /* 5. Самите копчиња за избор на подарок/цвет */
+        .gift-option-btn,
+        .builder-option-btn {
+            padding: 12px 10px !important;
+            gap: 4px !important;
+            border-radius: 10px !important;
+        }
+
+        .gift-option-btn strong,
+        .builder-option-btn strong {
+            font-size: 13px !important;
+        }
+
+        .gift-option-btn span,
+        .builder-option-btn span {
+            font-size: 11.5px !important;
+        }
+
+        /* 6. Живиот преглед (Live Preview Box) - да стои стабилно горе или долу без да биде збиен */
+        .gift-preview-box,
+        .builder-preview-box {
+            position: relative !important;
+            top: 0 !important;
+            padding: 20px !important;
+            margin-top: 10px !important;
+        }
+
+        .gift-preview-canvas,
+        .preview-canvas {
+            height: 200px !important; /* Помала висина на платната за преглед на мобилен */
+            margin-bottom: 15px !important;
+        }
+
+        .animated-gift,
+        .animated-bouquet {
+            font-size: 50px !important; /* Намалена иконка за да се вклопи убаво */
+        }
+
+        .gift-preview-details,
+        .preview-details {
+            padding: 12px !important;
+            font-size: 13px !important;
+            gap: 6px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        /* На многу мали телефони опциите нека се редат една под друга за максимален преглед */
+        .gift-options-grid,
+        .builder-options-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* ОПТИМИЗАЦИЈА НА СЕКЦИЈАТА ЗА КОНСУЛТАЦИИ И ИНФОРМАЦИИ     */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        /* Најди ја главната кутија за консултации во оваа секција и претвори ја во 1 колона со соодветен padding */
+        .section-soft .container > div {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 25px !important;
+            padding: 20px !important; /* Намален padding за да има повеќе слободен простор */
+        }
+
+        /* Наслов и текст во консултациите */
+        .section-soft h2 {
+            font-size: 22px !important;
+            line-height: 1.25 !important;
+        }
+
+        .section-soft p {
+            font-size: 13.5px !important;
+            margin-bottom: 16px !important;
+        }
+
+        /* Делот за информации (десната кутија што сега е долу) */
+        .section-soft .section-soft + div,
+        .section-soft .container > div > div:nth-child(2) {
+            padding: 18px !important;
+            width: 100% !important;
+        }
+
+        .section-soft h3 {
+            font-size: 16px !important;
+        }
+
+        .section-soft div[style*="font-size: 14px"] {
+            font-size: 13px !important;
+            margin-bottom: 10px !important;
+        }
+    }
+
+
+
+    /* ========================================================== */
+    /* СЛИКИ ЦЕЛОСНИ И ЦЕНТРИРАНИ (ЗА СИТЕ ОСВЕН ABOUT СТРАНИЦАТА) */
+    /* ========================================================== */
+    @media (max-width: 992px) {
+        /* 1. Правилото важи насекаде, ОСВЕН кога се наоѓаме на страната со data-page="about" */
+        body:not([data-page="about"]) .product-image,
+        body:not([data-page="about"]) .gallery-item {
+            aspect-ratio: 4 / 3 !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            background: transparent !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        body:not([data-page="about"]) .product-image img,
+        body:not([data-page="about"]) .gallery-item img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center center !important;
+        }
+
+        /* 2. Центрирање на картичките исто така да важи само надвор од about страната */
+        body:not([data-page="about"]) .product-card {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+
+        body:not([data-page="about"]) .product-body {
+            align-items: center !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+    }
+}
