@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="pageTitleGifts">Подароци & Додатоци | Florentia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="sakura.png">
+
+    <style>
+        body {
+            background-color: var(--bg, #fff);
+            color: var(--text, #000);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        main.gifts-page,
+        .gifts-page section.container {
+            background-color: var(--bg, transparent);
+            color: var(--text, inherit);
+        }
+
+        .product-card {
+            background-color: var(--surface, #fff);
+            color: var(--text, #000);
+            border-color: var(--border, #eee);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card h3 {
+            color: var(--text, #000);
+        }
+
+        .filter-btn {
+            background-color: var(--surface, #fff);
+            color: var(--text, #000);
+            border: 1px solid var(--border, #ddd);
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .product-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-modal.active {
+            display: flex;
+        }
+
+        .product-modal-content {
+            position: relative;
+            background: var(--surface, #fff);
+            color: var(--text, #000);
+            width: min(900px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-modal-image {
+            width: 100%;
+            max-height: 65vh;
+            object-fit: contain;
+            display: block;
+            border-radius: 10px;
+            background: var(--soft, #f7f7f7);
+        }
+
+        .product-modal-description {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 18px 5px 5px;
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.65);
+            color: white;
+            font-size: 28px;
+            line-height: 40px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .product-card button {
+            cursor: pointer;
+            position: relative;
+            z-index: 3;
+        }
+
+        @media (max-width: 600px) {
+            .product-modal { padding: 10px; }
+            .product-modal-content { padding: 10px; border-radius: 12px; }
+            .product-modal-image { max-height: 70vh; }
+            .product-modal-description { font-size: 14px; margin: 12px 3px 3px; }
+        }
+    </style>
+</head>
+<body data-page="gifts">
+
+
+<canvas id="flowerCanvas"></canvas>
+
+
+<div id="loader" class="loader"><div class="loader-inner"><div class="loader-flower">🌸</div></div></div>
+<div id="site-header"></div>
+
+<main class="gifts-page">
+    <section class="container" style="padding: 60px 20px;">
+        <div class="page-header" style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+            <span class="badge-subtitle" style="color: var(--primary); font-weight: 600; text-transform: uppercase; font-size: 13px; letter-spacing: 1.5px;" data-key="giftsBadge">
+                Совршени изненадувања
+            </span>
+            <h1 style="font-size: 38px; margin-top: 10px; margin-bottom: 15px;" data-key="giftsTitle">
+                Подароци кои го раскажуваат вистинското чувство
+            </h1>
+            <p style="color: var(--muted); font-size: 16px;" data-key="giftsDesc">
+                Одберете луксузни парфеми, слатки плиш мечиња, уникатни декорации или креативни аранжмани кои совршено се комбинираат со нашите букети.
+            </p>
+        </div>
+
+        <!-- Секција за Филтри и Пребарување -->
+        <div class="shop-filters-wrapper" style="margin-bottom: 30px;">
+            <!-- Поле за пребарување (Search Bar) -->
+            <div class="search-bar-container">
+                <span class="search-icon" style="padding-bottom: 20px;">🔍</span>
+                <input type="text" id="searchInput" placeholder="Пребарај парфеми, мечиња, украси..." data-key="giftsSearchPlaceholder" data-i18n-type="placeholder">
+            </div>
+
+            <!-- Копчиња за филтрирање по категории -->
+            <div class="filter-buttons-group gift-filters" id="categoryFilters">
+                <button class="filter-btn active" data-filter="all" data-key="filterAll">Сите подароци</button>
+                <button class="filter-btn" data-filter="perfumes" data-key="filterPerfumes">Парфеми</button>
+                <button class="filter-btn" data-filter="plush" data-key="filterPlush">Мечиња & Плиш</button>
+                <button class="filter-btn" data-filter="decor" data-key="filterDecor">Украси & Дом</button>
+                <button class="filter-btn" data-filter="florist" data-key="filterFlorist">Терариуми</button>
+            </div>
+        </div>
+
+        <!-- Лента за резултати и сортирање -->
+        <div class="shop-sort-container" style="margin-bottom: 30px;">
+            <p id="resultsCount" style="color: var(--muted); font-size: 14px; font-weight: 500;" data-key="resultsShowingAll">Се прикажуваат сите производи</p>
+
+            <div>
+                <select id="sortSelect">
+                    <option value="default" data-key="sortDefault">Редовен редослед</option>
+                    <option value="price-asc" data-key="sortPriceAsc">Цена: Ниска → Висока</option>
+                    <option value="price-desc" data-key="sortPriceDesc">Цена: Висока → Ниска</option>
+                    <option value="name-asc" data-key="sortNameAsc">Име: А → Ш</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Контејнер каде што JS ги става картичките -->
+        <div class="products-grid" id="giftGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; margin-bottom: 60px;"></div>
+    </section>
+</main>
+
+<!-- Modal -->
+<div class="product-modal" id="productModal">
+    <div class="product-modal-content">
+        <button class="product-modal-close" id="modalClose" aria-label="Затвори">&times;</button>
+        <img id="modalImage" class="product-modal-image" src="" alt="">
+        <p id="modalDescription" class="product-modal-description"></p>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв" data-key="scrollToTopTitle" data-i18n-type="title">↑</button>
+
+<script src="js/translations.js"></script>
+<script src="js/gifts-data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const giftGrid = document.getElementById("giftGrid");
+        const searchInput = document.getElementById("searchInput");
+        const sortSelect = document.getElementById("sortSelect");
+        const resultsCount = document.getElementById("resultsCount");
+        const filterBtns = document.querySelectorAll(".gift-filters .filter-btn");
+
+        let currentCategory = "all";
+        let searchQuery = "";
+        let currentSort = "default";
+
+        function renderGifts() {
+            if (!giftGrid || typeof giftsData === "undefined") return;
+
+            const activeLang = localStorage.getItem("florentiaLang") || "mk";
+
+            // 1. Филтрирање по категорија
+            let result = currentCategory === "all"
+                ? [...giftsData]
+                : giftsData.filter(g => g.category === currentCategory);
+
+            // 2. Филтрирање по пребарување (по име или опис)
+            if (searchQuery.trim() !== "") {
+                const q = searchQuery.toLowerCase().trim();
+                result = result.filter(product => {
+                    const titleText = (typeof product.title === 'object' ? (product.title[activeLang] || product.title.mk) : product.title).toLowerCase();
+                    const descText = (typeof product.description === 'object' ? (product.description[activeLang] || product.description.mk) : product.description).toLowerCase();
+                    return titleText.includes(q) || descText.includes(q);
+                });
+            }
+
+            // 3. Сортирање
+            if (currentSort === "price-asc") {
+                result.sort((a, b) => a.priceMKD - b.priceMKD);
+            } else if (currentSort === "price-desc") {
+                result.sort((b, a) => a.priceMKD - b.priceMKD);
+            } else if (currentSort === "name-asc") {
+                result.sort((a, b) => {
+                    const nameA = (typeof a.title === 'object' ? (a.title[activeLang] || a.title.mk) : a.title).toLowerCase();
+                    const nameB = (typeof b.title === 'object' ? (b.title[activeLang] || b.title.mk) : b.title).toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+            }
+
+            // 4. Бројач на резултати
+            if (resultsCount) {
+                if (result.length === giftsData.length && !searchQuery) {
+                    resultsCount.textContent = activeLang === 'en' ? `Showing all ${giftsData.length} gifts` : `Се прикажуваат сите ${giftsData.length} подароци`;
+                } else {
+                    resultsCount.textContent = activeLang === 'en' ? `Found ${result.length} gifts` : `Пронајдени се ${result.length} подароци`;
+                }
+            }
+
+            // 5. Проверка ако нема резултати
+            if (result.length === 0) {
+                const noFoundText = activeLang === 'en' ? 'No gifts found matching your criteria.' : 'Нема пронајдено подароци со овие критериуми.';
+                giftGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px;">${noFoundText}</p>`;
+                return;
+            }
+
+            // 6. Рендерирање на картичките (со примена на респонзивните правила за слики што ги дефиниравме)
+            giftGrid.innerHTML = result.map(product => {
+                const titleText = typeof product.title === 'object' ? (product.title[activeLang] || product.title.mk) : product.title;
+                const descText = typeof product.description === 'object' ? (product.description[activeLang] || product.description.mk) : product.description;
+
+                const nameMk = typeof product.title === 'object' ? (product.title.mk || '') : product.title;
+                const nameEn = typeof product.title === 'object' ? (product.title.en || product.title.mk || '') : product.title;
+
+                let badgeText = '';
+                if (product.badge) {
+                    badgeText = typeof product.badge === 'object' ? (product.badge[activeLang] || product.badge.mk) : product.badge;
+                }
+
+                const badgeHtml = badgeText
+                    ? `<span class="gift-badge" style="position: absolute; top: 10px; left: 10px; background-color: ${product.badgeColor || 'var(--primary, #d4af37)'}; color: #fff; padding: 4px 10px; font-size: 11px; font-weight: 600; border-radius: 4px; z-index: 2;">${badgeText}</span>`
+                    : '';
+
+                const addToCartText = activeLang === 'en' ? 'Add to cart' : 'Додај во корпа';
+
+                return `
+                    <article class="product-card" data-category="${product.category}" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden; padding: 15px; display: flex; flex-direction: column;">
+                        <div class="product-image" style="position: relative; margin-bottom: 12px;">
+                            <img src="${product.image}" alt="${titleText}">
+                            ${badgeHtml}
+                        </div>
+
+                        <div class="product-body" style="display: flex; flex-direction: column; flex-grow: 1;">
+                            <h3 style="font-size: 16px; margin-bottom: 8px;">${titleText}</h3>
+                            <p class="card-description" style="color: var(--muted); font-size: 14px; margin-bottom: 15px; flex-grow: 1;">
+                                ${descText}
+                            </p>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                                <strong style="font-size: 18px; color: var(--primary);">
+                                    ${product.priceMKD.toLocaleString()} ден.
+                                </strong>
+                                <button onclick="addToCart(${product.id}, '${nameMk.replace(/'/g, "\\'")}', '${nameEn.replace(/'/g, "\\'")}', ${product.priceMKD}, '${product.image}')"
+                                        class="btn btn-dark"
+                                        style="padding: 8px 16px; font-size: 14px;">
+                                    ${addToCartText}
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            attachModalEvents();
+        }
+
+        // Настан за пишување во полето за пребарување
+        if (searchInput) {
+            searchInput.addEventListener("input", (e) => {
+                searchQuery = e.target.value;
+                renderGifts();
+            });
+        }
+
+        // Настан за промена на сортирањето
+        if (sortSelect) {
+            sortSelect.addEventListener("change", (e) => {
+                currentSort = e.target.value;
+                renderGifts();
+            });
+        }
+
+        // Настан за клик на филтер копчињата
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentCategory = btn.getAttribute("data-filter");
+                renderGifts();
+            });
+        });
+
+        // Слушање за промена на јазик преку глобалното копче
+        const langToggleBtn = document.getElementById("lang-toggle");
+        if (langToggleBtn) {
+            langToggleBtn.addEventListener("click", () => {
+                setTimeout(() => {
+                    renderGifts();
+                }, 50);
+            });
+        }
+
+        const modal = document.getElementById("productModal");
+        const modalImage = document.getElementById("modalImage");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalClose = document.getElementById("modalClose");
+
+        function attachModalEvents() {
+            document.querySelectorAll("#giftGrid .product-card").forEach(card => {
+                card.addEventListener("click", function(event) {
+                    if (event.target.closest("button")) return;
+
+                    const image = card.querySelector(".product-image img");
+                    const description = card.querySelector(".card-description");
+                    if (!image || !description) return;
+
+                    modalImage.src = image.src;
+                    modalImage.alt = image.alt;
+                    modalDescription.textContent = description.textContent.trim();
+
+                    modal.classList.add("active");
+                    document.body.style.overflow = "hidden";
+                });
+            });
+        }
+
+        if (modalClose) {
+            modalClose.addEventListener("click", () => {
+                modal.classList.remove("active");
+                document.body.style.overflow = "";
+            });
+        }
+
+        if (modal) {
+            modal.addEventListener("click", (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove("active");
+                    document.body.style.overflow = "";
+                }
+            });
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && modal) {
+                modal.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+        });
+
+        // Првично вчитување
+        renderGifts();
+    });
+</script>
+
+</body>
+</html>

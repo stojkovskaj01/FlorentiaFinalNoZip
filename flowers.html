@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="mk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-key="pageTitleFlowers">Колекција цвеќиња | Florentia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="sakura.png">
+</head>
+<body data-page="shop">
+
+<canvas id="flowerCanvas"></canvas>
+
+
+
+<div id="loader" class="loader"><div class="loader-inner"><div class="loader-flower">🌸</div><h3 data-key="loaderBrand">Florentia</h3></div></div>
+<div id="site-header"></div>
+
+<main>
+    <!-- Горна лента со наслов -->
+    <div class="page-hero">
+        <div class="container">
+            <span class="eyebrow" style="color:var(--primary); font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:1px;" data-key="shopEyebrow">Florentia Каталог</span>
+            <h1 data-key="shopTitle">Нашата колекција</h1>
+            <p style="color:var(--muted); font-size: 16px; margin-top: 5px;" data-key="shopDesc">Пронајдете го совршениот букет или аранжман за секоја пригода.</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Секција за Филтри и Пребарување -->
+        <div class="shop-filters-wrapper">
+
+            <!-- Поле за пребарување (Search Bar) -->
+            <div class="search-bar-container">
+                <span class="search-icon" style="padding-bottom: 20px;">🔍</span>
+                <input type="text" id="searchInput" placeholder="Пребарај рози, букети, саксиски цвеќиња..." data-key="searchPlaceholder" data-i18n-type="placeholder">
+            </div>
+
+            <!-- Копчиња за филтрирање по категории (без подароци) -->
+            <div class="filter-buttons-group" id="categoryFilters">
+                <button class="filter-btn active" data-filter="all" data-key="filterShowAll">Прикажи ги сите производи</button>
+                <button class="filter-btn" data-filter="roses" data-key="filterRoses">Рози</button>
+                <button class="filter-btn" data-filter="classic" data-key="filterBouquets">Букети</button>
+                <button class="filter-btn" data-filter="potted" data-key="filterPotted">Саксиски цвеќиња</button>
+            </div>
+
+        </div>
+
+        <!-- Лента за резултати и сортирање -->
+        <div class="shop-sort-container">
+            <p id="resultsCount" style="color: var(--muted); font-size: 14px; font-weight: 500;" data-key="resultsShowingAll">Се прикажуваат сите производи</p>
+
+            <div>
+                <select id="sortSelect">
+                    <option value="default" data-key="sortDefault">Редовен редослед</option>
+                    <option value="price-asc" data-key="sortPriceAsc">Цена: Ниска → Висока</option>
+                    <option value="price-desc" data-key="sortPriceDesc">Цена: Висока → Ниска</option>
+                    <option value="name-asc" data-key="sortNameAsc">Име: А → Ш</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Мрежа со производи -->
+        <div id="productGrid" class="product-grid" style="margin-bottom: 60px;" data-page-type="shop"></div>
+
+    </div>
+</main>
+
+<div id="cookie-banner" class="cookie-banner">
+    <p data-key="cookieText">Користиме колачиња (cookies) за подобро корисничко искуство. Можете да ги прифатите или одбиете.</p>
+    <div class="cookie-actions">
+        <button id="cookie-decline" data-key="cookieDecline">Одбиј</button>
+        <button id="cookie-accept" class="accept" data-key="cookieAccept">Прифати</button>
+    </div>
+</div>
+
+
+<!-- Модал прозорец за производи -->
+<div class="product-modal" id="productModal">
+    <div class="product-modal-content">
+        <button class="product-modal-close" id="modalClose" aria-label="Затвори">&times;</button>
+        <img id="modalImage" class="product-modal-image" src="" alt="">
+        <p id="modalDescription" class="product-modal-description"></p>
+    </div>
+</div>
+
+
+<!-- Копче за враќање на врвот -->
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв" data-key="scrollToTopTitle" data-i18n-type="title">↑</button>
+
+<div id="site-footer"></div>
+
+<script src="js/translations.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const filterBtns = document.querySelectorAll("#categoryFilters .filter-btn");
+
+        // Поврзување на копчињата за категории директно со глобалната функција од products.js
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                const selectedCategory = btn.getAttribute("data-filter");
+                if (typeof window.filterShopProducts === "function") {
+                    window.filterShopProducts({ category: selectedCategory });
+                }
+            });
+        });
+
+        // Синхронизација на URL параметарот ?type= ако постои (пр. ?type=roses)
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedType = urlParams.get("type");
+        if (selectedType) {
+            filterBtns.forEach(btn => {
+                if (btn.getAttribute("data-filter") === selectedType) {
+                    btn.classList.add("active");
+                } else {
+                    btn.classList.remove("active");
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

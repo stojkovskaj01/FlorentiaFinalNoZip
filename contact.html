@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="mk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-key="pageTitleContact">Контакт | Florentia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" type="image/png" href="sakura.png">
+
+</head>
+<body data-page="contact">
+
+
+
+<canvas id="flowerCanvas"></canvas>
+
+
+<div id="loader" class="loader"><div class="loader-inner"><div class="loader-flower">🌸</div></div></div>
+<div id="site-header"></div>
+
+<main>
+    <!-- Странична херо секција -->
+    <section class="page-hero">
+        <div class="container" style="text-align: center; max-width: 700px;">
+            <span class="eyebrow" style="color:var(--primary); font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:1px;" data-key="contactEyebrow">Тука сме за вас</span>
+            <h1 data-key="contactMainTitle">Контактирајте нè</h1>
+            <p style="color:var(--muted); font-size:17px; margin-top:8px;" data-key="contactMainDesc">Имате прашање за нарачка, специфичен свадбен аранжман или сакате совет? Пишувајте ни со задоволство ќе ви одговориме.</p>
+        </div>
+    </section>
+
+    <!-- Главна содржина: Контакт информации лево + Форма десно -->
+    <section class="section" style="padding-top: 10px;">
+        <div class="container contact-grid">
+
+            <!-- Лева страна: Информации -->
+            <div class="contact-info-card">
+                <h3 style="margin-bottom: 20px; font-size: 20px;" data-key="contactInfoTitle">Информации</h3>
+
+                <div class="contact-info-item">
+                    <span class="icon">📍</span>
+                    <div>
+                        <h4 data-key="contactAddressTitle">Адреса на продавницата</h4>
+                        <p data-key="contactAddressText">ул. Македонија бр. 12, Скопје, Центар</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <span class="icon">📞</span>
+                    <div>
+                        <h4 data-key="contactPhoneTitle">Телефон за контакт</h4>
+                        <p>+389 2 3100 200 / +389 70 123 456</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <span class="icon">✉️</span>
+                    <div>
+                        <h4 data-key="contactEmailTitle">Електронска пошта</h4>
+                        <p>kontakt@florentia.mk</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <span class="icon">⏰</span>
+                    <div>
+                        <h4 data-key="contactHoursTitle">Работно време</h4>
+                        <p data-key="contactHoursText">Пон - Саб: 08:00 - 20:00<br>Недела: 09:00 - 16:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Десна страна: Форма за контакт -->
+            <div class="glass-form">
+                <h3 style="margin-bottom: 15px; font-size: 20px;" data-key="contactFormTitle">Испратете ни порака</h3>
+
+                <form id="contactForm">
+                    <div>
+                        <label for="name" data-key="labelName">Ваше име и презиме</label>
+                        <input type="text" id="name" required placeholder="на пр. Стефан Стефановски" data-key="placeholderName" data-i18n-type="placeholder">
+                    </div>
+
+                    <div>
+                        <label for="email" data-key="labelEmail">Е-пошта</label>
+                        <input type="email" id="email" required placeholder="stefan@example.com" data-key="placeholderEmail" data-i18n-type="placeholder">
+                    </div>
+
+                    <div>
+                        <label for="subject" data-key="labelSubject">Тема на пораката</label>
+                        <input type="text" id="subject" required placeholder="На пр. Прашање за свадбен букет" data-key="placeholderSubject" data-i18n-type="placeholder">
+                    </div>
+
+                    <div>
+                        <label for="message" data-key="labelMessage">Вашата порака</label>
+                        <textarea id="message" rows="4" required placeholder="Напишете ги вашите желби или прашања тука..." data-key="placeholderMessage" data-i18n-type="placeholder"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark" style="width: 100%;" data-key="contactSubmitBtn">Испрати порака</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<!-- МОДАЛНО ПРОЗОРЧЕ (ПОП-АП) ЗА УСПЕШНО ИСПРАТЕНА ПОРАКА -->
+<div id="successModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-icon">🌸</div>
+        <h3 data-key="modalSuccessTitle">Пораката е испратена!</h3>
+        <p data-key="modalSuccessDesc">Ви благодариме што нè контактиравте. Нашиот тим ќе ја прочита вашата порака и ќе ви одговори во најкраток можен рок.</p>
+        <button id="closeModalBtn" class="btn btn-dark" style="width: 100%;" data-key="modalCloseBtn">Затвори</button>
+    </div>
+</div>
+
+<div id="cookie-banner" class="cookie-banner">
+    <p data-key="cookieText">Користиме колачиња (cookies) за подобро корисничко искуство. Можете да ги прифатите или одбиете.</p>
+    <div class="cookie-actions">
+        <button id="cookie-decline" data-key="cookieDecline">Одбиј</button>
+        <button id="cookie-accept" class="accept" data-key="cookieAccept">Прифати</button>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+
+<!-- Јаваскрипт логика за отворање на модалното прозорче на место на alert() -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const contactForm = document.getElementById("contactForm");
+        const successModal = document.getElementById("successModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+
+        if (contactForm) {
+            contactForm.addEventListener("submit", (e) => {
+                e.preventDefault(); // Спречува стандардно ресетирање/рестартирање на страна
+
+                successModal.classList.add("active");
+
+                // Исчисти ја формата
+                contactForm.reset();
+            });
+        }
+
+        // Затварање на прозорчето при клик на копчето
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener("click", () => {
+                successModal.classList.remove("active");
+            });
+        }
+
+        // Затварање на прозорчето при клик надвор од него (на позадината)
+        if (successModal) {
+            successModal.addEventListener("click", (e) => {
+                if (e.target === successModal) {
+                    successModal.classList.remove("active");
+                }
+            });
+        }
+    });
+</script>
+
+<!-- Копче за враќање на врвот -->
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв" data-key="scrollToTopTitle" data-i18n-type="title">↑</button>
+
+<script src="js/translations.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+</body>
+</html>

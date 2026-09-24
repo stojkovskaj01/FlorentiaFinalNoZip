@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="pageTitleIndex">Florentia | Цвеќе со приказна</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="sakura.png">
+</head>
+<body data-page="home">
+
+<canvas id="flowerCanvas"></canvas>
+
+<!-- Loader -->
+<div id="loader" class="loader">
+    <div class="loader-inner">
+        <div class="loader-flower">🌸</div>
+        <p style="font-weight: 500; font-size: 14px; color: var(--muted);" data-key="loaderText">Florentia се вчитува...</p>
+    </div>
+</div>
+
+<!-- Header (се динамички вчитува од main.js) -->
+<div id="site-header"></div>
+
+<!-- Hero Секција -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-copy">
+                <h1 data-key="heroTitle">Цвеќиња со приказна, креирани со љубов.</h1>
+                <span data-key="heroSubtitle">Добредојдовте во Florentia – вашето омилено цветно катче во Скопје. Најдете го совршениот букет или креирајте го сами со нашата интерактивна алатка.</span>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="flowers.html" class="btn btn-dark" data-key="exploreCollection">Разгледај ја колекцијата</a>
+                    <a href="builder.html" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);" data-key="createGift">Креирај свој подарок</a>
+                    <a href="blog.html" class="btn btn-outline" style="border-color: var(--border); color: var(--text);" data-key="blogTips"> Блог & Совети</a>
+                </div>
+            </div>
+
+            <div>
+                <img src="sliki/nasl.jpeg"
+                     alt="Florentia Букет"
+                     style="width: 100%; border-radius: var(--radius); box-shadow: 0 20px 40px var(--accent-glow); object-fit: cover; aspect-ratio: 4/3;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mini Strip -->
+<div class="mini-strip">
+    <div class="mini">
+        <strong>100%</strong>
+        <span data-key="mini1">Свежо цвеќе секој ден</span>
+    </div>
+
+    <div class="mini">
+        <strong data-key="miniFast">Брза</strong>
+        <span data-key="mini2">Достава во Скопје</span>
+    </div>
+
+    <div class="mini">
+        <strong data-key="miniUnique">Уникатно</strong>
+        <span data-key="mini3">Рачно изработени аранжмани</span>
+    </div>
+
+    <div class="mini">
+        <strong>1000+</strong>
+        <span data-key="mini4">Задоволни корисници</span>
+    </div>
+
+    <div class="mini">
+        <strong>120+</strong>
+        <span data-key="mini5">свадбени приказни</span>
+    </div>
+
+    <div class="mini">
+        <strong>1.500+</strong>
+        <span data-key="mini6">создадени букети</span>
+    </div>
+</div>
+
+<!-- ИЗБОР ПО ПОВОД -->
+<section class="section">
+    <div class="container">
+
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 40px auto;">
+            <span style="color: var(--primary); font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;" data-key="occasionEyebrow">
+                Инспирација за секој момент
+            </span>
+
+            <h2 style="font-size: 32px; margin-top: 8px; font-weight: 700;" data-key="occasionTitle">
+                За каков повод барате совршен подарок?
+            </h2>
+
+            <p style="color: var(--muted); font-size: 15px; margin-top: 8px;" data-key="occasionDesc">
+                Изберете категорија и откријте ги специјално подготвените аранжмани за вашите најзначајни моменти.
+            </p>
+        </div>
+
+        <div class="mood-grid">
+
+            <div class="mood-card" onclick="window.location.href='flowers.html?type=classic'">
+                <span style="font-size: 32px; display: block; margin-bottom: 12px;">🎂</span>
+                <h4 data-key="mood1Title">Родендени & Јубилеи</h4>
+                <p data-key="mood1Desc">Јарки и весели букети кои изнудуваат насмевки и радост.</p>
+            </div>
+
+            <div class="mood-card" onclick="window.location.href='flowers.html?type=roses'">
+                <span style="font-size: 32px; display: block; margin-bottom: 12px;">🌹</span>
+                <h4 data-key="mood2Title">Романтика & Љубов</h4>
+                <p data-key="mood2Desc">Елегантни црвени и пастелни ружи за посебни романтични мигови.</p>
+            </div>
+
+            <div class="mood-card" onclick="window.location.href='weddings.html'">
+                <span style="font-size: 32px; display: block; margin-bottom: 12px;">💍</span>
+                <h4 data-key="mood3Title">Свадбени аранжмани</h4>
+                <p data-key="mood3Desc">Луксузни цветни декорации за вашиот најважен ден од животот.</p>
+            </div>
+
+            <div class="mood-card" onclick="window.location.href='flowers.html?type=potted'">
+                <span style="font-size: 32px; display: block; margin-bottom: 12px;">🌿</span>
+                <h4 data-key="mood4Title">Домашен амбиент & Саксии</h4>
+                <p data-key="mood4Desc">Прекрасни саксиски растенија кои носат живот и мир во домот.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ИЗБРАНИ ПРОИЗВОДИ -->
+<section class="section section-soft">
+    <div class="container">
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 15px;">
+
+            <div>
+                <span style="color: var(--primary); font-weight: 600; font-size: 14px; text-transform: uppercase;" data-key="featuredEyebrow">
+                    Издвоено од понудата
+                </span>
+
+                <h2 style="font-size: 32px; font-weight: 700; margin-top: 5px;" data-key="featuredTitle">
+                    Популарни избори овој месец
+                </h2>
+            </div>
+
+            <a href="flowers.html" class="btn btn-outline" style="border-color: var(--border);" data-key="viewAllProducts">
+                Види ги сите производи →
+            </a>
+
+        </div>
+
+        <div class="product-grid">
+
+            <!-- 1. РОЗОВИ РОЗИ -->
+            <article class="product-card">
+                <div class="product-image">
+                    <img src="sliki/image2.avif" alt="Свежи розови рози">
+                    <span class="gift-badge" data-key="badgePopular">Популарно</span>
+                </div>
+
+                <div class="product-body" style="display: flex; flex-direction: column; height: 100%;">
+                    <h3 data-key="prod1Title">Свежи розови рози</h3>
+                    <p class="card-description" style="color: var(--muted); font-size: 14px; margin-bottom: 15px; flex-grow: 1;" data-key="prod1Desc">
+                        Нежни розови рози со свеж изглед, внимателно избрани и подготвени како елегантен подарок за секоја посебна пригода.
+                    </p>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <strong style="font-size: 18px; color: var(--primary);">1,650 ден.</strong>
+                        <button onclick="addToCart(301, 'Свежи розови рози', 'Fresh Pink Roses', 1650, 'sliki/image2.avif')" class="btn btn-dark" style="padding: 8px 16px; font-size: 14px;" data-key="addToCart">
+                            Додај во корпа
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. ПАСТЕЛЕН БУКЕТ -->
+            <article class="product-card">
+                <div class="product-image">
+                    <img src="sliki/image3.avif" alt="Нежен свадбен цветен аранжман со рози и бели цветови">
+                    <span class="gift-badge" style="background-color: #d4af37;" data-key="badgeMonth">Избор на месецот</span>
+                </div>
+
+                <div class="product-body" style="display: flex; flex-direction: column; height: 100%;">
+                    <h3 data-key="prod2Title">Букет „Пастелна нежност“</h3>
+                    <p class="card-description" style="color: var(--muted); font-size: 14px; margin-bottom: 15px; flex-grow: 1;" data-key="prod2Desc">
+                        Свеж букет во нежни пастелни тонови со розови и бели цветови, создаден за романтични моменти и убави изненадувања.
+                    </p>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <strong style="font-size: 18px; color: var(--primary);">1,890 ден.</strong>
+                        <!-- Испратено: ID, македонско име, англиско име, цена и слика -->
+                        <button onclick="addToCart(302, 'Букет „Пастелна нежност“', 'Pastel Tenderness Bouquet', 1890, 'sliki/image3.avif')" class="btn btn-dark" style="padding: 8px 16px; font-size: 14px;" data-key="addToCart">
+                            Додај во корпа
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. РОЗОВИ БОЖУРИ -->
+            <article class="product-card">
+                <div class="product-image">
+                    <img src="sliki/image4.avif" alt="Розови божури">
+                    <span class="gift-badge" style="background-color: #2e7d32;" data-key="badgeNew">Ново</span>
+                </div>
+
+                <div class="product-body" style="display: flex; flex-direction: column; height: 100%;">
+                    <h3 data-key="prod3Title">Розови божури „Пролетен сон“</h3>
+                    <p class="card-description" style="color: var(--muted); font-size: 14px; margin-bottom: 15px; flex-grow: 1;" data-key="prod3Desc">
+                        Раскошни свежи божури во нежни розови нијанси, идеални за подарок, роденден или романтичен момент.
+                    </p>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <strong style="font-size: 18px; color: var(--primary);">2,150 ден.</strong>
+                        <!-- Испратено: ID, македонско име, англиско име, цена и слика -->
+                        <button onclick="addToCart(303, 'Розови божури „Пролетен сон“', 'Pink Peonies „Spring Dream“', 2150, 'sliki/image4.avif')" class="btn btn-dark" style="padding: 8px 16px; font-size: 14px;" data-key="addToCart">
+                            Додај во корпа
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- MODAL ЗА ПРОИЗВОДИТЕ -->
+<div class="product-modal" id="featuredProductModal">
+    <div class="product-modal-content">
+        <button class="product-modal-close" id="featuredModalClose" aria-label="Затвори">&times;</button>
+        <img id="featuredModalImage" class="product-modal-image" src="" alt="">
+        <p id="featuredModalDescription" class="product-modal-description"></p>
+    </div>
+</div>
+
+<!-- РОТИРАЧКИ ИНСПИРАТИВНИ ЦИТАТИ -->
+<section class="section">
+    <div class="container">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 50px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); position: relative; overflow: hidden;">
+            <div style="font-size: 40px; color: var(--primary); line-height: 1; margin-bottom: 15px;">“</div>
+            <h3 id="quote-text" style="font-size: 22px; font-weight: 600; max-width: 750px; margin: 0 auto 15px auto; color: var(--text); line-height: 1.5; min-height: 66px; transition: opacity 0.4s ease;" data-key="quote1Text">
+                Цвеќињата се зборовите на земјата изговорени во безмолвна убавина.
+            </h3>
+            <span id="quote-author" style="font-size: 14px; color: var(--muted); font-style: italic; transition: opacity 0.4s ease;" data-key="quote1Author">
+                — Едвин Борк
+            </span>
+            <div id="quote-dots" style="margin-top: 25px; display: flex; justify-content: center; gap: 8px; cursor: pointer;"></div>
+        </div>
+    </div>
+</section>
+
+<!-- СЕКЦИЈА ЗА БЕСПЛАТНИ КОНСУЛТАЦИИ -->
+<section class="section section-soft">
+    <div class="container">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+            <div>
+                <span style="color: var(--primary); font-weight: 600; font-size: 14px; text-transform: uppercase; display: block; margin-bottom: 8px;" data-key="consultEyebrow">
+                    Експертски совет
+                </span>
+                <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 12px;" data-key="consultTitle">
+                    Не сте сигурни кој аранжман е идеален за вас?
+                </h2>
+                <p style="color: var(--muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6;" data-key="consultDesc">
+                    Закажете бесплатна консултација со нашите професионални флористи. Без разлика дали станува збор за роденден, корпоративни настани или свадба, ние ви овозможуваме персонализирани решенија.
+                </p>
+                <a href="contact.html" class="btn btn-dark" data-key="consultBtn">Закажи бесплатна консултација</a>
+            </div>
+            <div style="background: var(--soft); border: 1px solid var(--border); border-radius: 12px; padding: 25px;">
+                <h3 style="font-size: 18px; margin-bottom: 15px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 10px;" data-key="infoTitle">
+                    📍 Информации
+                </h3>
+                <div style="margin-bottom: 12px; font-size: 14px;">
+                    <strong style="display: block; color: var(--text);" data-key="infoPhoneLabel">📞 Телефон за контакт:</strong>
+                    <span style="color: var(--muted);">+389 2 3100 200 / +389 70 123 456</span>
+                </div>
+                <div style="margin-bottom: 12px; font-size: 14px;">
+                    <strong style="display: block; color: var(--text);" data-key="infoEmailLabel">✉️ Електронска пошта:</strong>
+                    <span style="color: var(--muted);">kontakt@florentia.mk</span>
+                </div>
+                <div style="font-size: 14px;">
+                    <strong style="display: block; color: var(--text);" data-key="infoHoursLabel">⏰ Работно време:</strong>
+                    <span style="color: var(--muted);" data-key="infoHoursVal">Пон - Саб: 08:00 - 20:00<br>Недела: 09:00 - 16:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ГАЛЕРИЈА -->
+<section class="section">
+    <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 40px auto;">
+            <span style="color: var(--primary); font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;" data-key="galleryEyebrow">
+                Галерија на инспирација
+            </span>
+            <h2 style="font-size: 32px; margin-top: 8px; font-weight: 700;" data-key="galleryTitle">
+                Моменти од нашите изработки
+            </h2>
+            <p style="color: var(--muted); font-size: 15px; margin-top: 8px;" data-key="galleryDesc">
+                Погледнете дел од уникатните букети и декорации создадени во нашето студио.
+            </p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="sliki/image5.avif" alt="Пастелен букет со розови рози, бели лалиња и лизијантус">
+                <div class="gallery-overlay"><span class="gallery-icon">🌸</span><h4 class="gallery-title" data-key="gal1Title">Пастелна хармонија</h4><span class="gallery-sub" data-key="gal1Sub">Розови рози, бели лалиња и лизијантус</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image6.avif" alt="Розов парфем опкружен со нежни розови цветови">
+                <div class="gallery-overlay"><span class="gallery-icon">🌸</span><h4 class="gallery-title" data-key="gal2Title">Нежен цветен парфем</h4><span class="gallery-sub" data-key="gal2Sub">Парфем со розови цветови</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image7.avif" alt="Зелено саксиско растение во декоративна саксија">
+                <div class="gallery-overlay"><span class="gallery-icon">🪴</span><h4 class="gallery-title" data-key="gal3Title">Зелена свежина</h4><span class="gallery-sub" data-key="gal3Sub">Саксиско растение за модерен дом</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image8.avif" alt="Нежен свадбен цветен аранжман со рози и бели цветови">
+                <div class="gallery-overlay"><span class="gallery-icon">💍</span><h4 class="gallery-title" data-key="gal4Title">Свадбена нежност</h4><span class="gallery-sub" data-key="gal4Sub">Рози и бели цветови за посебен ден</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image9.avif" alt="Вазна со розови цветови во пријатен домашен ентериер">
+                <div class="gallery-overlay"><span class="gallery-icon">🏡</span><h4 class="gallery-title" data-key="gal5Title">Цветен дом</h4><span class="gallery-sub" data-key="gal5Sub">Нежни цветови во топол домашен амбиент</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image10.avif" alt="Цвеќе во вазна со украсна декорација">
+                <div class="gallery-overlay"><span class="gallery-icon">🌷</span><h4 class="gallery-title" data-key="gal6Title">Цвеќе за домот</h4><span class="gallery-sub" data-key="gal6Sub">Елегантна декорација</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image11.avif" alt="Човек со букет рози и мече">
+                <div class="gallery-overlay"><span class="gallery-icon">❤️</span><h4 class="gallery-title" data-key="gal7Title">Романтично изненадување</h4><span class="gallery-sub" data-key="gal7Sub">Рози и подарок за сакана личност</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image12.avif" alt="Плишено мече со букет цвеќе">
+                <div class="gallery-overlay"><span class="gallery-icon">🧸</span><h4 class="gallery-title" data-key="gal8Title">Мече со цветен подарок</h4><span class="gallery-sub" data-key="gal8Sub">Нежен подарок за посебен момент</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image13.avif" alt="Девојка со букет и плишено мече">
+                <div class="gallery-overlay"><span class="gallery-icon">🎁</span><h4 class="gallery-title" data-key="gal9Title">Подарок од срце</h4><span class="gallery-sub" data-key="gal9Sub">Букет и плишено мече</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image14.avif" alt="Роденденска прослава со рози и големо мече">
+                <div class="gallery-overlay"><span class="gallery-icon">🎂</span><h4 class="gallery-title" data-key="gal10Title">Роденденска радост</h4><span class="gallery-sub" data-key="gal10Sub">Рози и големо плишено мече</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image15.avif" alt="Романтичен подарок со црвено мече и букет">
+                <div class="gallery-overlay"><span class="gallery-icon">💗</span><h4 class="gallery-title" data-key="gal11Title">Романтичен подарок</h4><span class="gallery-sub" data-key="gal11Sub">Мече и цветен букет</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image16.avif" alt="Букет со рози">
+                <div class="gallery-overlay"><span class="gallery-icon">🌹</span><h4 class="gallery-title" data-key="gal12Title">Црвени рози</h4><span class="gallery-sub" data-key="gal12Sub">Класичен романтичен букет</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image17.avif" alt="Свеж цветен аранжман">
+                <div class="gallery-overlay"><span class="gallery-icon">💐</span><h4 class="gallery-title" data-key="gal13Title">Пролетен букет</h4><span class="gallery-sub" data-key="gal13Sub">Свежи и нежни цветови</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image18.avif" alt="Затворен стаклен терариум со фитонија и мов">
+                <div class="gallery-overlay"><span class="gallery-icon">🪴</span><h4 class="gallery-title" data-key="gal14Title">Затворен терариум</h4><span class="gallery-sub" data-key="gal14Sub">Фитонија и природен мов</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image19.avif" alt="Шумски стаклен терариум со мов и папрат">
+                <div class="gallery-overlay"><span class="gallery-icon">🌿</span><h4 class="gallery-title" data-key="gal15Title">Шумски терариум</h4><span class="gallery-sub" data-key="gal15Sub">Мов, папрат и природни камења</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="sliki/image20.avif" alt="Плишено мече опкружено со цветна декорација">
+                <div class="gallery-overlay"><span class="gallery-icon">✨</span><h4 class="gallery-title" data-key="gal16Title">Цветно изненадување</h4><span class="gallery-sub" data-key="gal16Sub">Мече со декоративно цвеќе</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<div id="site-footer"></div>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+        <div class="cookie-text">
+            <h4 data-key="cookieTitle">Приватност и колачиња (Cookies)</h4>
+            <p data-key="cookieDesc">Користиме колачиња за да ви овозможиме најдобро искуство на нашата веб-страница.</p>
+        </div>
+        <div class="cookie-buttons">
+            <button id="cookie-decline" class="btn btn-outline" style="padding: 8px 14px; font-size:13px;" data-key="cookieDecline">Одбиј</button>
+            <button id="cookie-accept" class="btn btn-dark accept" style="padding: 8px 14px; font-size:13px; background: var(--primary);" data-key="cookieAccept">Прифати</button>
+        </div>
+    </div>
+</div>
+
+<!-- Копче за скрол до горе -->
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв">↑</button>
+
+
+<!-- Модал прозорец -->
+<div class="product-modal" id="productModal">
+    <div class="product-modal-content">
+        <button class="product-modal-close" id="modalClose" aria-label="Затвори">&times;</button>
+        <img id="modalImage" class="product-modal-image" src="" alt="">
+        <p id="modalDescription" class="product-modal-description"></p>
+    </div>
+</div>
+
+
+<!-- Скрипти -->
+<script src="js/translations.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("productModal");
+        if (!modal) return;
+
+        const modalImage = document.getElementById("modalImage");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalClose = document.getElementById("modalClose");
+
+        // Слушај клик на картичките (освен кога се кликнува копчето за кошничка)
+        document.querySelectorAll(".product-grid .product-card").forEach(card => {
+            card.addEventListener("click", function(event) {
+                if (event.target.closest("button")) return;
+
+                const image = card.querySelector(".product-image img");
+                const description = card.querySelector(".card-description");
+                if (!image || !description) return;
+
+                modalImage.src = image.src;
+                modalImage.alt = image.alt;
+                modalDescription.textContent = description.textContent.trim();
+
+                modal.classList.add("active");
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        if (modalClose) {
+            modalClose.addEventListener("click", () => {
+                modal.classList.remove("active");
+                document.body.style.overflow = "";
+            });
+        }
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                modal.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

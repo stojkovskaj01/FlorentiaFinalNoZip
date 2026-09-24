@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="mk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-key="pageTitleBuilder">Направи уникатен подарок | Florentia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="sakura.png">
+</head>
+<body data-page="builder">
+
+
+<canvas id="flowerCanvas"></canvas>
+
+
+<div id="loader" class="loader"><div class="loader-inner"><div class="loader-flower">🌸</div></div></div>
+<div id="site-header"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="container" style="text-align: center; max-width: 700px;">
+            <span class="eyebrow" style="color:var(--primary); font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:1px;" data-key="builderEyebrow">Креативно студио</span>
+            <h1 data-key="builderMainTitle">Дизајнирај го твојот совршен подарок</h1>
+            <p style="color:var(--muted); font-size:16px; margin-top:8px;" data-key="builderMainDesc">Избери пакување, комбинирај омилени цвеќиња, додај детали и остави ни конкретно барање или порака.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 10px;">
+        <div class="container builder-layout">
+
+            <!-- ЛЕВА СТРАНА: Избор -->
+            <div class="builder-steps-container">
+
+                <!-- 1. Пакување / База -->
+                <div class="builder-step-card">
+                    <h3 data-key="builderStep1Title">1. Избери пакување (опционално)</h3>
+                    <div class="builder-options-grid">
+                        <button class="builder-option-btn" onclick="updateWrapper('wrapBox1', 300, this)">
+                            <strong data-key="wrapBox1">Луксузна кружна кутија</strong>
+                            <span>300 <span data-key="currency">ден.</span></span>
+                        </button>
+                        <button class="builder-option-btn" onclick="updateWrapper('wrapBox2', 400, this)">
+                            <strong data-key="wrapBox2">Декоративна дрвена гајбичка</strong>
+                            <span>400 <span data-key="currency">ден.</span></span>
+                        </button>
+                        <button class="builder-option-btn" onclick="updateWrapper('wrapBox3', 150, this)">
+                            <strong data-key="wrapBox3">Крафт хартија со врвка</strong>
+                            <span>150 <span data-key="currency">ден.</span></span>
+                        </button>
+                        <button class="builder-option-btn" onclick="updateWrapper('wrapBox4', 220, this)">
+                            <strong data-key="wrapBox4">Елегантна торбичка</strong>
+                            <span>220 <span data-key="currency">ден.</span></span>
+                        </button>
+                        <button class="builder-option-btn" onclick="updateWrapper('wrapBox5', 500, this)">
+                            <strong data-key="wrapBox5">Стаклена вазна</strong>
+                            <span>500 <span data-key="currency">ден.</span></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Цвеќиња -->
+                <div class="builder-step-card">
+                    <h3 data-key="builderStep2Title">2. Избери цвеќиња (може повеќе)</h3>
+                    <div class="builder-options-grid">
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower1" data-price="550" onchange="updateBuilderState()">
+                            <div><strong data-key="flower1">Црвени рози (10 парчиња)</strong></div>
+                            <span>550 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower2" data-price="550" onchange="updateBuilderState()">
+                            <div><strong data-key="flower2">Бели рози (10 парчиња)</strong></div>
+                            <span>550 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower3" data-price="450" onchange="updateBuilderState()">
+                            <div><strong data-key="flower3">Розови лалиња (10 парчиња)</strong></div>
+                            <span>450 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower4" data-price="680" onchange="updateBuilderState()">
+                            <div><strong data-key="flower4">Бели орхидеи (5 гранчиња)</strong></div>
+                            <span>680 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower5" data-price="390" onchange="updateBuilderState()">
+                            <div><strong data-key="flower5">Сончогледи (5 парчиња)</strong></div>
+                            <span>390 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower6" data-price="420" onchange="updateBuilderState()">
+                            <div><strong data-key="flower6">Кралски гербери (7 парчиња)</strong></div>
+                            <span>420 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower7" data-price="350" onchange="updateBuilderState()">
+                            <div><strong data-key="flower7">Каранфили (10 парчиња)</strong></div>
+                            <span>350 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower8" data-price="750" onchange="updateBuilderState()">
+                            <div><strong data-key="flower8">Божур (5 парчиња)</strong></div>
+                            <span>750 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower9" data-price="520" onchange="updateBuilderState()">
+                            <div><strong data-key="flower9">Хортензии (3 парчиња)</strong></div>
+                            <span>520 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower10" data-price="420" onchange="updateBuilderState()">
+                            <div><strong data-key="flower10">Еустоми (7 парчиња)</strong></div>
+                            <span>420 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower11" data-price="450" onchange="updateBuilderState()">
+                            <div><strong data-key="flower11">Кринови (5 парчиња)</strong></div>
+                            <span>450 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower12" data-price="820" onchange="updateBuilderState()">
+                            <div><strong data-key="flower12">Француски сини орхидеи (5 парчиња)</strong></div>
+                            <span>820 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower13" data-price="580" onchange="updateBuilderState()">
+                            <div><strong data-key="flower13">Кралски кали (7 парчиња)</strong></div>
+                            <span>580 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower14" data-price="350" onchange="updateBuilderState()">
+                            <div><strong data-key="flower14">Жолти мимози (7 парчиња)</strong></div>
+                            <span>350 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower15" data-price="540" onchange="updateBuilderState()">
+                            <div><strong data-key="flower15">Ранункулуси (7 парчиња)</strong></div>
+                            <span>540 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower16" data-price="490" onchange="updateBuilderState()">
+                            <div><strong data-key="flower16">Шарени анемони (7 парчиња)</strong></div>
+                            <span>490 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower17" data-price="380" onchange="updateBuilderState()">
+                            <div><strong data-key="flower17">Мирисни јасмин гранчиња (10 парчиња)</strong></div>
+                            <span>380 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower18" data-price="400" onchange="updateBuilderState()">
+                            <div><strong data-key="flower18">Африкански гербери мини (10 парчиња)</strong></div>
+                            <span>400 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="flowers" value="flower19" data-price="290" onchange="updateBuilderState()">
+                            <div><strong data-key="flower19">Диви полски маргаритки (7 парчиња)</strong></div>
+                            <span>290 <span data-key="currency">ден.</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 3. Додатоци и подароци -->
+                <div class="builder-step-card">
+                    <h3 data-key="builderStep3Title">3. Додатоци и подароци по желба</h3>
+                    <div class="builder-options-grid">
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="extras" value="extra1" data-price="100" onchange="updateBuilderState()">
+                            <div><strong data-key="extra1">Сатенска панделка</strong></div>
+                            <span>100 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="extras" value="extra2" data-price="250" onchange="updateBuilderState()">
+                            <div><strong data-key="extra2">Чоколадо</strong></div>
+                            <span>250 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="extras" value="extra3" data-price="80" onchange="updateBuilderState()">
+                            <div><strong data-key="extra3">Честитка со порака</strong></div>
+                            <span>80 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="extras" value="extra4" data-price="350" onchange="updateBuilderState()">
+                            <div><strong data-key="extra4">Миризлива свеќа</strong></div>
+                            <span>350 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="extras" value="extra5" data-price="450" onchange="updateBuilderState()">
+                            <div><strong data-key="extra5">Плишено мече</strong></div>
+                            <span>450 <span data-key="currency">ден.</span></span>
+                        </label>
+                        <label class="builder-option-btn checkbox-label">
+                            <input type="checkbox" name="extras" value="extra6" data-price="550" onchange="updateBuilderState()">
+                            <div><strong data-key="extra6">Шампањ (mini)</strong></div>
+                            <span>550 <span data-key="currency">ден.</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 4. Специфично барање / Порака за честитка -->
+                <div class="builder-step-card">
+                    <h3 data-key="builderStep4Title">4. Конкретно барање или текст за честитка</h3>
+                    <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;" data-key="builderStep4Desc">Напишете ни доколку имате посебна желба за боите, време на достава или текст за во честитката.</p>
+                    <textarea id="customNote" rows="4" placeholder="пр. Ве молам панделката да биде црвена, а пораката во честитката нека гласи: Среќен роденден љубов!" data-key="builderPlaceholderNote" data-i18n-type="placeholder" style="width: 100%; padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-family: inherit; font-size: 14px; resize: vertical;"></textarea>
+                </div>
+
+            </div>
+
+            <!-- ДЕСНА СТРАНА: Преглед -->
+            <div>
+                <div class="builder-preview-box" style="text-align: left; position: sticky; top: 20px;">
+                    <h3 style="font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;" data-key="builderSummaryTitle">Вашиот избор</h3>
+
+                    <div class="preview-details" style="border: none; background: transparent; padding: 0; margin-bottom: 20px;">
+                        <div style="margin-bottom: 8px;"><span class="label" data-key="summaryWrapperLabel">Пакување:</span> <strong id="summaryWrapper" data-key="summaryNoWrapper">Нема избрано пакување</strong></div>
+                        <div style="margin-bottom: 8px;"><span class="label" data-key="summaryFlowersLabel">Цвеќиња:</span> <strong id="summaryFlowers" data-key="summaryNoFlowers">Нема избрано цвеќе</strong></div>
+                        <div style="margin-bottom: 8px;"><span class="label" data-key="summaryExtrasLabel">Додатоци:</span> <strong id="summaryExtras" data-key="summaryNoExtras">Нема додатоци</strong></div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
+                        <span style="font-size: 16px; font-weight: 600;" data-key="summaryTotalLabel">Вкупно:</span>
+                        <span id="builderTotalPrice" style="font-size: 22px; font-weight: bold; color: var(--primary);">0 <span data-key="currency">ден.</span></span>
+                    </div>
+
+                    <button onclick="addCustomBouquetToCart()" class="btn btn-dark" style="width: 100%; padding: 14px; font-size: 15px;" data-key="addToCart">Додај во кошничка</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<div id="cookie-banner" class="cookie-banner">
+    <p data-key="cookieText">Користиме колачиња (cookies) за подобро корисничко искуство.</p>
+    <div class="cookie-actions">
+        <button id="cookie-decline" data-key="cookieDecline">Одбиј</button>
+        <button id="cookie-accept" class="accept" data-key="cookieAccept">Прифати</button>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+
+<style>
+    .builder-option-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+    .checkbox-label { cursor: pointer; }
+    .checkbox-label input[type="checkbox"] { display: none; }
+    .checkbox-label.selected {
+        border-color: var(--primary);
+        background: var(--soft);
+    }
+</style>
+
+<script>
+    let currentWrapperKey = null;
+    let currentWrapperPrice = 0;
+
+    function updateWrapper(key, price, element) {
+        if (element.classList.contains('selected')) {
+            element.classList.remove('selected');
+            currentWrapperKey = null;
+            currentWrapperPrice = 0;
+        } else {
+            element.parentElement.querySelectorAll('.builder-option-btn').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            currentWrapperKey = key;
+            currentWrapperPrice = price;
+        }
+        updateBuilderState();
+    }
+
+    function updateBuilderState() {
+        const activeLang = localStorage.getItem("florentiaLang") || "mk";
+        const selectedFlowers = document.querySelectorAll('input[name="flowers"]:checked');
+        const selectedExtras = document.querySelectorAll('input[name="extras"]:checked');
+
+        document.querySelectorAll('.checkbox-label').forEach(label => {
+            if (label.querySelector('input').checked) {
+                label.classList.add('selected');
+            } else {
+                label.classList.remove('selected');
+            }
+        });
+
+        // Земи го преводот за валутата („ден.“ или „MKD“ зависно што имаш во translations.js)
+        const currencyText = translations[activeLang]?.['currency'] || 'ден.';
+
+        // Превод на пакувањето во десниот панел
+        let wrapperText = activeLang === 'en' ? "No packaging selected" : "Нема избрано пакување";
+        if (currentWrapperKey !== null) {
+            const translatedName = translations[activeLang]?.[currentWrapperKey] || currentWrapperKey;
+            wrapperText = `${translatedName} (${currentWrapperPrice} ${currencyText})`;
+        }
+
+        let flowersNames = [];
+        let flowersTotal = 0;
+        selectedFlowers.forEach(cb => {
+            const key = cb.value;
+            const translatedFlower = translations[activeLang]?.[key] || key;
+            flowersNames.push(translatedFlower);
+            flowersTotal += parseInt(cb.getAttribute('data-price'));
+        });
+
+        let extrasNames = [];
+        let extrasTotal = 0;
+        selectedExtras.forEach(cb => {
+            const key = cb.value;
+            const translatedExtra = translations[activeLang]?.[key] || key;
+            extrasNames.push(translatedExtra);
+            extrasTotal += parseInt(cb.getAttribute('data-price'));
+        });
+
+        if (flowersNames.length === 0) {
+            flowersNames.push(activeLang === 'en' ? "No flowers selected" : "Нема избрано цвеќе");
+        }
+        if (extrasNames.length === 0) {
+            extrasNames.push(activeLang === 'en' ? "No add-ons selected" : "Нема додатоци");
+        }
+
+        document.getElementById('summaryWrapper').innerText = wrapperText;
+        document.getElementById('summaryFlowers').innerText = flowersNames.join(", ");
+        document.getElementById('summaryExtras').innerText = extrasNames.join(", ");
+
+        const grandTotal = currentWrapperPrice + flowersTotal + extrasTotal;
+        // Динамички се ажурира цената заедно со соодветниот збор за валута според тековниот јазик
+        document.getElementById('builderTotalPrice').innerHTML = `${grandTotal} <span data-key="currency">${currencyText}</span>`;
+    }
+
+    // Глобална функција за освежување при промена на јазик од главното мени
+    window.renderBuilder = updateBuilderState;
+
+    function addCustomBouquetToCart() {
+        const selectedFlowers = document.querySelectorAll('input[name="flowers"]:checked');
+        const selectedExtras = document.querySelectorAll('input[name="extras"]:checked');
+        const userNote = document.getElementById('customNote').value.trim();
+
+        let total = currentWrapperPrice;
+        selectedFlowers.forEach(cb => total += parseInt(cb.getAttribute('data-price')));
+        selectedExtras.forEach(cb => total += parseInt(cb.getAttribute('data-price')));
+
+        const wrapperNameMk = currentWrapperKey ? (translations.mk[currentWrapperKey] || "") : "";
+        const wrapperNameEn = currentWrapperKey ? (translations.en[currentWrapperKey] || "") : "";
+
+        let customTitleMk = wrapperNameMk ? `Custom Подарок (${wrapperNameMk})` : `Custom Подарок`;
+        let customTitleEn = wrapperNameEn ? `Custom Gift (${wrapperNameEn})` : `Custom Gift`;
+
+        if (userNote !== "") {
+            customTitleMk += ` | Порака: "${userNote}"`;
+            customTitleEn += ` | Note: "${userNote}"`;
+        }
+
+        window.addToCart(9999 + Math.floor(Math.random() * 1000), customTitleMk, customTitleEn, total, "");
+    }
+</script>
+
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв" data-key="scrollToTopTitle" data-i18n-type="title">↑</button>
+
+<script src="js/translations.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+</body>
+</html>

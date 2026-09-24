@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="mk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-key="pageTitleBlog">Блог & Совети | Florentia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="sakura.png">
+    <style>
+        /* Стили за модал прозорецот за читање статија */
+        .blog-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .blog-modal-content {
+            background: var(--surface);
+            color: var(--text);
+            width: 100%;
+            max-width: 750px;
+            border-radius: var(--radius);
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .blog-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--muted);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .blog-close-btn:hover {
+            color: var(--primary);
+        }
+        .clickable-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .clickable-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body data-page="blog">
+
+
+<canvas id="flowerCanvas"></canvas>
+
+
+
+<div id="loader" class="loader"><div class="loader-inner"><div class="loader-flower">🌸</div></div></div>
+<div id="site-header"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumbs"><span data-key="blogBreadcrumb">Блог & Совети</span></div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- СЕКЦИЈА 1: КОРИСНИ СОВЕТИ -->
+    <!-- ========================================= -->
+
+    <section class="section">
+        <div class="container">
+
+            <div style="margin-bottom: 30px; border-bottom: 2px solid var(--border); padding-bottom: 10px;">
+                <h2 style="font-size: 24px; font-weight: 700; color: var(--text);" data-key="blogSection1Title">
+                    Практични совети за нега
+                </h2>
+
+                <p style="color: var(--muted); font-size: 14px; margin-top: 5px;" data-key="blogSection1Desc">
+                    Научете како стручно да го продолжите животот на вашите свежи цвеќиња и растенија.
+                </p>
+            </div>
+
+
+            <div class="product-grid">
+
+                <!-- Совет 1 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('tip1')">
+                    <div class="product-image">
+                        <img src="sliki/image21.avif" alt="Свеж букет цвеќе">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="tip1Eyebrow">Tips · 12 Мај</span>
+                        <h3 style="margin: 8px 0;" data-key="tip1Title">Како да го одржиш букетот свеж подолго време?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="tip1Desc">Едноставни трикови за секојдневно менување на водата и правилно сечење на стебленцата.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Совет 2 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('tip2')">
+                    <div class="product-image">
+                        <img src="sliki/image22.avif" alt="Домашни саксиски растенија">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="tip2Eyebrow">Tips · 28 Апр</span>
+                        <h3 style="margin: 8px 0;" data-key="tip2Title">Водич за домашно цвеќе: Колку често се наводнуваат саксиските билки?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="tip2Desc">Откријте ги вистинските методи за одгледување орхидеи и зелени домашни растенија.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Совет 3 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('tip3')">
+                    <div class="product-image">
+                        <img src="sliki/image23.avif" alt="Цвеќе заштитено од директно сонце">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="tip3Eyebrow">Tips · 15 Мар</span>
+                        <h3 style="margin: 8px 0;" data-key="tip3Title">Заштита на цвеќето во текот на променливото време</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="tip3Desc">Зошто струењето на воздухот и директното сонце можат да ги оштетат свежите цветови.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Совет 4 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('tip4')">
+                    <div class="product-image">
+                        <img src="sliki/image24.avif" alt="Нега и прихрана на домашни растенија">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="tip4Eyebrow">Tips · 02 Мар</span>
+                        <h3 style="margin: 8px 0;" data-key="tip4Title">Природни ѓубрива: Како да им дадете енергија на домашните растенија?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="tip4Desc">Искористете домашни состојки како корења од банана и вода од варени јајца за бујен раст.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Совет 5 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('tip5')">
+                    <div class="product-image">
+                        <img src="sliki/image25.avif" alt="Пресадување на домашно растение">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="tip5Eyebrow">Tips · 18 Фев</span>
+                        <h3 style="margin: 8px 0;" data-key="tip5Title">Време е за ново тенџере: Како и кога правилно се пресадуваат растенијата?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="tip5Desc">Знаци кои ви покажуваат дека на вашето растение му треба поголема саксија и свежа земја.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Совет 6 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('tip6')">
+                    <div class="product-image">
+                        <img src="sliki/image26.avif" alt="Нега и чистење на листови од домашни растенија">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="tip6Eyebrow">Tips · 05 Фев</span>
+                        <h3 style="margin: 8px 0;" data-key="tip6Title">Сјај и здив за зелените листови: Како правилно да се брише прашината?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="tip6Desc">Зошто насобраната прашина ја попречува фотосинтезата и како да им вратите сјај на листовите.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================= -->
+    <!-- СЕКЦИЈА 2: ЦВЕТНИ ПРИКАЗНИ И ТРЕНДОВИ -->
+    <!-- ========================================= -->
+
+    <section class="section section-soft" style="padding-top: 20px;">
+        <div class="container">
+
+            <div style="margin-bottom: 30px; border-bottom: 2px solid var(--border); padding-bottom: 10px;">
+                <h2 style="font-size: 24px; font-weight: 700; color: var(--text);" data-key="blogSection2Title">
+                    Цветни приказни и трендови
+                </h2>
+                <p style="color: var(--muted); font-size: 14px; margin-top: 5px;" data-key="blogSection2Desc">
+                    Инспирирајте се од светските трендови, симболики и нашите свадбени приказни.
+                </p>
+            </div>
+
+            <div class="product-grid">
+
+                <!-- Приказна 1 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('story1')">
+                    <div class="product-image">
+                        <img src="sliki/image27.avif" alt="Свадбена флористика и цветна декорација">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="story1Eyebrow">Weddings · 04 Апр</span>
+                        <h3 style="margin: 8px 0;" data-key="story1Title">Трендови во свадбената флористика за оваа сезона</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="story1Desc">Што е популарно кај модерните невести? Од арки со суво цвеќе до пастелни божури.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Приказна 2 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('story2')">
+                    <div class="product-image">
+                        <img src="sliki/image28.avif" alt="Рози во розова, жолта и бела боја">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="story2Eyebrow">Stories · 20 Фев</span>
+                        <h3 style="margin: 8px 0;" data-key="story2Title">Јазикот на цвеќето: Што кажува секоја боја на ружата?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="story2Desc">Историјата на симболизмот – што значат црвените, белите и жолтите ружи.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Приказна 3 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('story3')">
+                    <div class="product-image">
+                        <img src="sliki/image29.avif" alt="Луксузен парфем со цветен аранжман">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="story3Eyebrow">Ideas · 14 Фебр</span>
+                        <h3 style="margin: 8px 0;" data-key="story3Title">Совршениот спој: Цвеќе и луксузен парфем како изненадување</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="story3Desc">Зошто комбинацијата од букет и мирис е ултимативниот гест на внимание.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Приказна 4 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('story4')">
+                    <div class="product-image">
+                        <img src="sliki/image30.avif" alt="Шарено цвеќе и психологија на боите">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="story4Eyebrow">Stories · 10 Јан</span>
+                        <h3 style="margin: 8px 0;" data-key="story4Title">Психологијата на боите во флористиката: Како цвеќето влијае на расположението?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="story4Desc">Зошто жолтите цветови носат енергија, а сините и виолетовите носат мир и релаксација.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Приказна 5 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('story5')">
+                    <div class="product-image">
+                        <img src="sliki/image31.avif" alt="Природни материјали и еко флористика">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="story5Eyebrow">Trends · 22 Дек</span>
+                        <h3 style="margin: 8px 0;" data-key="story5Title">Еко-флористика: Како да избираме еколошки пакувања без пластика?</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="story5Desc">Зошто пакувањата од разградлива хартија и памучни врвки стануваат нов стандард во светот.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+                <!-- Приказна 6 -->
+                <article class="product-card clickable-card" onclick="openBlogModal('story6')">
+                    <div class="product-image">
+                        <img src="sliki/image32.avif" alt="Историски цветен аранжман">
+                    </div>
+                    <div class="product-body">
+                        <span class="eyebrow" style="color: var(--primary);" data-key="story6Eyebrow">History · 15 Ное</span>
+                        <h3 style="margin: 8px 0;" data-key="story6Title">Историјата на цветните аранжмани: Од антички Египет до модерни студија</h3>
+                        <p style="color: var(--muted); font-size: 14px;" data-key="story6Desc">Како луѓето низ вековите ја користеле убавината на цвеќето за украсување и кралски ритуали.</p>
+                        <span style="display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--primary);" data-key="readMore">Прочитај повеќе →</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+<!-- МОДАЛ -->
+<div id="blogModal" class="blog-modal" onclick="openBlogModalOnOutside(event)">
+    <div class="blog-modal-content">
+        <span class="blog-close-btn" onclick="closeBlogModal()">&times;</span>
+        <div id="modalBodyContent">
+            <!-- Динамички се вчитува текстот -->
+        </div>
+    </div>
+</div>
+
+
+<!-- Копче за враќање на врвот -->
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв" data-key="scrollToTopTitle" data-i18n-type="title">↑</button>
+
+
+<!-- Cookie banner -->
+<div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-content">
+        <div class="cookie-text">
+            <h4 data-key="cookieTitle">Приватност и колачиња (Cookies)</h4>
+            <p data-key="cookieText">Користиме колачиња за да ви овозможиме најдобро искуство на нашата веб-страница.</p>
+        </div>
+        <div class="cookie-buttons">
+            <button id="cookie-decline" class="btn btn-outline" style="padding: 8px 14px; font-size:13px;" data-key="cookieDecline">Одбиј</button>
+            <button id="cookie-accept" class="btn btn-dark accept" style="padding: 8px 14px; font-size:13px; background: var(--primary);" data-key="cookieAccept">Прифати</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="site-footer"></div>
+
+<!-- КОМПЛЕТНА БАЗА НА СТАТИИ НА ДВА ЈАЗИЦИ (МК / EN) И ЛОГИКА ЗА МОДАЛОТ -->
+<script>
+    const articlesData = {
+        mk: {
+            tip1: {
+                title: "Како да го одржиш букетот свеж подолго време?",
+                date: "Tips · 12 Мај",
+                image: "sliki/image21.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Добивањето или купувањето на свеж букет претставува вистинско задоволство и естетско уживање за секој дом. Меѓутоа, за да ја задржите таа неверојатна свежина и бујност што подолго, неопходно е да се применуваат одредени стручни флористички техники и правилна нега во домашни услови.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">1. Професионално сечење на стебленцата под агол</h4>
+                    <p style="margin-bottom: 12px;">Првиот и најважен чекор пред да го сместите букетот во вазна е скратувањето на стебленцата. Секогаш користете исклучително остар нож или специјални градинарски ножици, сечејќи ги под остар агол од 45 степени. Никогаш не користете тупи кујнски алатки кои ги гмечат и затвораат проводните канали на стеблото преку кои цветот се храни со вода. Косото сечење овозможува поголема површина за слободна апсорпција на течноста.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">2. Безусловна хигиена и отстранување на зеленилото</h4>
+                    <p style="margin-bottom: 12px;">Сите листови кои би се наоѓале под нивото на водата во вазната мора задолжително да се отстранат пред поставувањето. Доколку тие останат во водата, многу брзо започнуваат да гнијат, создавајќи поволна средина за развој на бактерии кои ги затнуваат стебленцата. Дополнително, вазната треба темелно да се измие со млак сапун при секоја промена на водата.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">3. Избор на вистинска локација и хемиски влијанија</h4>
+                    <p>Менувајте ја водата на секои два дена и користете ја хранливата смеса која ја добивате во пакетот од Florentia. Важен совет што многумина го занемаруваат: никогаш не го поставувајте букетот во близина на чинии со овошје (особено банани и јаболка). Овошјето емитира невидлив гас етилен кој дејствува како забрзувач на стареењето и предизвикува брзо опаѓање на ливчињата.</p>
+                `
+            },
+            tip2: {
+                title: "Водич за домашно цвеќе: Колку често се наводнуваат саксиските билки?",
+                date: "Tips · 28 Апр",
+                image: "sliki/image22.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Најчестата грешка што почетниците, па дури и искусните љубители на цвеќе ја прават, е несоодветното наводнување. Прекумерното полевање најчесто води до смрт на растенијата поради трајно оштетување и гниење на кореновиот систем.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Златното правило на прстот</h4>
+                    <p style="margin-bottom: 12px;">За да избегнете нагаѓање, секогаш користете го проверениот метод на длабинска проверка. Втурнете го прстот во земјата на длабочина од околу 3 сантиметри. Ако под површината почвата е сува и не се лепи, време е за умерено наводнување. Ако чувствувате влага, одложете го полевањето за неколку дена.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Индивидуални потреби на популарните видови</h4>
+                    <p style="margin-bottom: 12px;">• <strong>Сукуленти и Кактеси:</strong> Создадени се да преживеат сушни периоди со задржување на вода во своите дебели листови. Бараат полевање само откако земјата ќе биде целосно сува (на секои 10-15 дена).</p>
+                    <p style="margin-bottom: 12px;">• <strong>Тропски растенија (Монстера, Спатифилум):</strong> Бараат конзистентна, умерена влажност во почвата, но никогаш застоена вода во долната чинија.</p>
+                    <p>• <strong>Орхидеи (Phalaenopsis):</strong> Наместо класично турање вода одозгора, најдобро е саксијата да ја потопите во сад со одстојана млака вода на секои 7 дена во траење од 15 минути, па потоа темелно да ја исцедите.</p>
+                `
+            },
+            tip3: {
+                title: "Заштита на цвеќето во текот на променливото време",
+                date: "Tips · 15 Мар",
+                image: "sliki/image23.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Преодните сезони и променливите временски услови носат нагли температурни колебања кои се сериозен тест за издржливоста на свежите цвеќиња и домашните растенија.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Опасноста од термален шок</h4>
+                    <p style="margin-bottom: 12px;">Кога носите свеж букет од цвеќарница надвор во студени или ветерни денови, брзата промена на амбиентот предизвикува силен термален шок. Резултатот се видливи оштетувања, виткање и потемнување на рабовите на ливчињата за само неколку часа. Затоа, професионалното заштитно пакување е задолжителен елемент.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Влијанието на грејните тела и клима-уредите</h4>
+                    <p>Во домашни услови, избегнувајте поставување на цвеќето директно под силно дување од инвертер климатизери или во близина на активни радијатори. Сувиот и топол вештачки воздух предизвикува моментална дехидратација на цветовите, правејќи ги подложни на брзо венеење.</p>
+                `
+            },
+            tip4: {
+                title: "Природни ѓубрива: Како да им дадете енергија на домашните растенија?",
+                date: "Tips · 02 Мар",
+                image: "sliki/image24.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Постигнувањето на буен раст и блескав изглед кај саксиските растенија не бара секогаш купување скапи хемиски препарати. Во кујната имаме богатство од природни состојки кои функционираат како врвен био-еликсир.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Моќта на корите од банана</h4>
+                    <p style="margin-bottom: 12px;">Корите од банана се природна ризница на калиум, фосфор и калциум – минерали кои го стимулираат развојот на нови цветови и го зајакнуваат стеблото. Можете да ги исецкате и директно да ги закопате под површината на земјата или да подготвите воден натоп со кој ќе наводнувате по неколку дена.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Искористување на водата од варени јајца</h4>
+                    <p>Кога подготвувате јајца, не ја фрлајте водата од тенџерето. Откако целосно ќе се олади (и под услов да не е солена), оваа течност е пребогата со чист калциум. Таа помага во регулирањето на киселоста на почвата и им овозможува на вашите билки да развијат цврсти, здрави и сјајни листови.</p>
+                `
+            },
+            tip5: {
+                title: "Време е за ново тенџере: Како и кога правилно се пресадуваат растенијата?",
+                date: "Tips · 18 Фев",
+                image: "sliki/image25.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Пресадувањето е еден од најважните процеси за одржување на виталноста и здравиот развој на домашните растенија, но истовремено претставува и шок доколку не се изведе правилно.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Клучни знаци дека е време за поголема саксија</h4>
+                    <p style="margin-bottom: 12px;">Најсигурен знак дека растението ја „надраснало“ својата стара саксија е појавата на корења кои излегуваат низ долните дренажни отвори. Исто така, ако забележите дека почвата пребрзо се суши по полевањето или дека растот е целосно застоен, тоа е јасен сигнал за акција. Секогаш бирајте сад кој е само 2 до 4 сантиметри поширок од претходниот.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Идеален временски период</h4>
+                    <p>Најдобро време за овој зафат е раната пролет, пред да започне сезоната на интензивен биолошки раст. Користете квалитетна супстратна мешавина со добра дренажа на дното за да спречите задржување на вишок вода.</p>
+                `
+            },
+            tip6: {
+                title: "Сјај и здив за зелените листови: Како правилно да се брише прашината?",
+                date: "Tips · 05 Фев",
+                image: "sliki/image26.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Листовите на домашните зелени растенија функционираат како нивни природни бели дробови. Со текот на времето, врз нив се насобира слој прашина кој ја блокира светлината и го попречува виталниот процес на фотосинтеза.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Техника на нежно чистење</h4>
+                    <p style="margin-bottom: 12px;">За големи листови (како Монстера или Фикус), користете мека крпа од микрофибер натопена во млака вода и нежно избришете ја секоја површина посебно, придржувајќи го листот од долната страна за да спречите кршење. Кај растенијата со ситни листови, повременото туширање со млак и благ млаз вода во када е совршено решение.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Зошто да се избегнуваат евтини хемиски спрејови</h4>
+                    <p>Иако комерцијалните спрејови за моментален сјај даваат брз ефект, тие често содржат масла кои ги затнуваат природните стоматични пори на листот, оневозможувајќи му на растението нормално да дише.</p>
+                `
+            },
+            story1: {
+                title: "Трендови во свадбената флористика за оваа сезона",
+                date: "Weddings · 04 Апр",
+                image: "sliki/image27.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Современите свадбени прослави носат сосема нова естетска филозофија во дизајнот на просторот, ставајќи го акцентот на еколошката одржливост, органичноста и уникатните неконвенционални форми.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Органски и слободни невестински букети</h4>
+                    <p style="margin-bottom: 12px;">Строгите, геометриски затворени топчести форми полека заминуваат во историјата. Модерните невести избираат расцутени, лелекави и асиметрични невестински букети кои изгледаат како цветовите директно да се собрани од дива и романтична ливада.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Топ нијанси и декоративни арки</h4>
+                    <p>Покрај неизбежната елегантна бела боја, доминираат топлите земјени и пастелни тонови: боја на праска, правливо розова, теракота и софистицирани суви треви. Големите цветни портали и арки на влезовите остануваат главен хит за совршени фотографии.</p>
+                `
+            },
+            story2: {
+                title: "Јазикот на цвеќето: Што кажува секоја боја на ружата?",
+                date: "Stories · 20 Фев",
+                image: "sliki/image28.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Низ вековите, особено за време на викторијанската ера, цвеќето се користело како софистициран и таен начин на комуникација за изразување чувства кои општествените норми не дозволувале да се кажат гласно – уметност позната како Флориографија.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Црвената ружа како симбол на вечна страст</h4>
+                    <p style="margin-bottom: 12px;">Универзален и моќен симбол на длабока романса, почит и незапирлива страст. Исто така, бројот на цветови во букетот носи порака (на пр. една ружа значи безусловна љубов на прв поглед, додека десет симболизираат комплетна совршеност).</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Симболиноста на другите бои</h4>
+                    <p>Белата ружа ја претставува чистотата и новиот почеток, розовата изразува восхит и благодарност, додека жолтите ружи денес носат порака на радост, енергија и искрено пријателство.</p>
+                `
+            },
+            story3: {
+                title: "Совршениот спој: Цвеќе и луксузен парфем како изненадување",
+                date: "Ideas · 14 Фебр",
+                image: "sliki/image29.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Кога имате потреба да креирате подарок кој остава без зборови и длабоко ги активира човечките сетила, комбинацијата од свеж цветен аранжман и врвен луксузен парфем е непогрешен избор.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Невенливата синергија на мирисите</h4>
+                    <p style="margin-bottom: 12px;">Човечкиот мозок ги памети емоциите и спомените најсилно токму преку сетилото за мирис. Спојувањето на деликатниот мирис на свежи ружи или божури со потписот на омилениот парфем креира мултисензорно искуство кое останува во сеќавање цел живот.</p>
+                `
+            },
+            story4: {
+                title: "Психологијата на боите во флористиката: Како цвеќето влијае на расположението?",
+                date: "Stories · 10 Јан",
+                image: "sliki/image30.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Боите имаат директно влијание врз нашата потсвест, емоции и секојдневно расположение. Во флористиката, изборот на вистинските бои во букетот може радикално да ја промени енергијата во просторијата.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Енергијата на топлите тонови</h4>
+                    <p style="margin-bottom: 12px;">Жолтите и портокаловите цветови носат топлина, оптимизам и радост, стимулирајќи ја креативноста и социјалната енергија.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Мирот на ладните нијанси</h4>
+                    <p>Сините, виолетовите и нежните бели нијанси дејствуваат смирувачки, помагајќи во намалувањето на стресот и создавањето оаза на релаксација во вашиот дом.</p>
+                `
+            },
+            story5: {
+                title: "Еко-флористика: Како да избираме еколошки пакувања без пластика?",
+                date: "Trends · 22 Дек",
+                image: "sliki/image31.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Одржливоста повеќе не е само привремен тренд, туку неопходна одговорност. Еко-флористиката се фокусира на целосно исфрлање на пластичните фолии и замена со биоразградливи материјали.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Природни алтернативи</h4>
+                    <p>Употребата на крафт-хартија која се рециклира, јутени и памучни врвки, како и рачно изработени картонски кутии без пластични додатоци, овозможува врвна естетика со минимален еколошки отпечаток.</p>
+                `
+            },
+            story6: {
+                title: "Историјата на цветните аранжмани: Од антички Египет до модерни студија",
+                date: "History · 15 Ное",
+                image: "sliki/image32.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Уметноста на цветното аранжирање датира уште од времето на Стариот Египет, каде светите цветови се користеле за религиозни ритуали, кралски церемонии и украсување на палатите.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Еволуција низ епохите</h4>
+                    <p>Од грчките и римските венци на победата, преку азиската филозофија на Икебана, па сè до современите дизајнерски студија денес, цвеќето секогаш останало врвен симбол на елеганција и почит.</p>
+                `
+            }
+        },
+        en: {
+            tip1: {
+                title: "How to keep your bouquet fresh for a longer time?",
+                date: "Tips · 12 May",
+                image: "sliki/image21.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Receiving or buying a fresh bouquet is a true pleasure and aesthetic delight for any home. However, to maintain that incredible freshness and vibrancy for as long as possible, it is essential to apply certain expert florist techniques and proper home care.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">1. Professional stem cutting at an angle</h4>
+                    <p style="margin-bottom: 12px;">The first and most important step before placing the bouquet in a vase is trimming the stems. Always use an extremely sharp knife or special garden shears, cutting them at a sharp 45-degree angle. Never use blunt kitchen tools that crush and close the conducting channels of the stem. Slanted cutting allows a larger surface area for free water absorption.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">2. Absolute hygiene and foliage removal</h4>
+                    <p style="margin-bottom: 12px;">All leaves that would fall below the water level in the vase must be removed before placement. If left in water, they quickly begin to rot, creating a breeding ground for bacteria that clog the stems. Additionally, thoroughly wash the vase with mild soap during every water change.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">3. Choosing the right location and chemical influences</h4>
+                    <p>Change the water every two days and use the flower food packet provided by Florentia. An important tip many overlook: never place the bouquet near fruit bowls (especially bananas and apples). Fruit emits invisible ethylene gas which accelerates aging and causes rapid petal drop.</p>
+                `
+            },
+            tip2: {
+                title: "Indoor plant guide: How often should potted plants be watered?",
+                date: "Tips · 28 Apr",
+                image: "sliki/image22.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">The most common mistake beginners and even experienced plant lovers make is improper watering. Overwatering usually leads to plant death due to permanent root system damage and rot.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">The golden finger rule</h4>
+                    <p style="margin-bottom: 12px;">To avoid guesswork, always use the trusted depth-check method. Push your finger about 3 centimeters into the soil. If the soil beneath the surface is dry and does not stick, it is time for moderate watering. If you feel moisture, delay watering for a few days.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Individual needs of popular species</h4>
+                    <p style="margin-bottom: 12px;">• <strong>Succulents & Cacti:</strong> Built to survive dry periods by storing water in thick leaves. Water only after the soil is completely dry (every 10-15 days).</p>
+                    <p style="margin-bottom: 12px;">• <strong>Tropical plants (Monstera, Spathiphyllum):</strong> Require consistent, moderate soil moisture, but never standing water in the saucer.</p>
+                    <p>• <strong>Orchids (Phalaenopsis):</strong> Instead of pouring water from above, submerge the pot in a container of settled lukewarm water every 7 days for 15 minutes, then drain thoroughly.</p>
+                `
+            },
+            tip3: {
+                title: "Protecting flowers during changing weather",
+                date: "Tips · 15 Mar",
+                image: "sliki/image23.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Transition seasons and changing weather conditions bring sharp temperature fluctuations which test the resilience of fresh flowers and house plants.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">The danger of thermal shock</h4>
+                    <p style="margin-bottom: 12px;">When carrying a fresh bouquet from a flower shop outside on cold or windy days, rapid environment changes cause severe thermal shock. The result is visible damage, curling, and darkening of petal edges within hours. Therefore, professional protective packaging is mandatory.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">The impact of heaters and air conditioners</h4>
+                    <p>At home, avoid placing flowers directly under strong air conditioner airflow or near active radiators. Dry, warm artificial air causes immediate flower dehydration, making them prone to quick wilting.</p>
+                `
+            },
+            tip4: {
+                title: "Natural fertilizers: How to give your house plants an energy boost?",
+                date: "Tips · 02 Mar",
+                image: "sliki/image24.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Achieving lush growth and radiant appearance in potted plants doesn't always require expensive chemical products. Our kitchens hold a wealth of natural ingredients acting as top bio-elixirs.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">The power of banana peels</h4>
+                    <p style="margin-bottom: 12px;">Banana peels are a natural treasure trove of potassium, phosphorus, and calcium – minerals that stimulate new flower growth and strengthen stems. Chop and bury them directly under the soil or prepare a water soak to water plants after a few days.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Using boiled egg water</h4>
+                    <p>When cooking eggs, do not discard the pot water. Once fully cooled (and provided it's unsalted), this liquid is rich in pure calcium. It helps regulate soil acidity and helps your plants develop strong, healthy, and glossy leaves.</p>
+                `
+            },
+            tip5: {
+                title: "Time for a new pot: How and when to properly repot plants?",
+                date: "Tips · 18 Feb",
+                image: "sliki/image25.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Repotting is one of the most critical processes for maintaining vitality and healthy growth in indoor plants, but it can also cause shock if not executed correctly.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Key signs it's time for a larger pot</h4>
+                    <p style="margin-bottom: 12px;">The surest sign a plant has outgrown its old pot is roots emerging from the bottom drainage holes. Also, if soil dries too quickly after watering or growth stalls completely, it's a clear signal. Always choose a pot only 2 to 4 centimeters wider than the previous one.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Ideal timing</h4>
+                    <p>The best time for this task is early spring, before intensive biological growth begins. Use a quality potting mix with good bottom drainage to prevent water stagnation.</p>
+                `
+            },
+            tip6: {
+                title: "Gloss and breath for green leaves: How to properly dust plants?",
+                date: "Tips · 05 Feb",
+                image: "sliki/image26.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Indoor green plant leaves act as their natural lungs. Over time, a layer of dust accumulates on them, blocking light and hindering the vital process of photosynthesis.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Gentle cleaning technique</h4>
+                    <p style="margin-bottom: 12px;">For large leaves (like Monstera or Ficus), use a soft microfiber cloth dampened in lukewarm water and gently wipe each surface individually, supporting the leaf from underneath to prevent snapping. For small-leaved plants, periodic showering with a mild, lukewarm stream in the tub is the perfect solution.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Why avoid cheap chemical shine sprays</h4>
+                    <p>Although commercial instant-shine sprays offer quick effects, they often contain oils that clog the leaf's natural stomatal pores, preventing the plant from breathing normally.</p>
+                `
+            },
+            story1: {
+                title: "Wedding floristry trends for this season",
+                date: "Weddings · 04 Apr",
+                image: "sliki/image27.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Modern wedding celebrations bring a brand new aesthetic philosophy in space design, emphasizing ecological sustainability, organic flow, and unique unconventional shapes.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Organic and loose bridal bouquets</h4>
+                    <p style="margin-bottom: 12px;">Strict, geometrically closed ball shapes are slowly becoming history. Modern brides choose blooming, cascading, and asymmetric bridal bouquets that look as though flowers were freshly gathered from a wild, romantic meadow.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Top hues and decorative arches</h4>
+                    <p>Alongside timeless elegant white, warm earth and pastel tones dominate: peach, dusty rose, terracotta, and sophisticated dried grasses. Large floral arches and entrance portals remain a major hit for flawless photography.</p>
+                `
+            },
+            story2: {
+                title: "The language of flowers: What does each rose color mean?",
+                date: "Stories · 20 Feb",
+                image: "sliki/image28.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Throughout the centuries, especially during the Victorian era, flowers were used as a sophisticated, secret mode of communication to express feelings that social norms forbade speaking aloud – an art known as Floriography.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Red rose as a symbol of eternal passion</h4>
+                    <p style="margin-bottom: 12px;">A universal and powerful symbol of deep romance, respect, and unstoppable passion. Additionally, flower counts carry messages (e.g., one rose means unconditional love at first sight, while ten symbolize complete perfection).</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Symbolism of other colors</h4>
+                    <p>White roses represent purity and new beginnings, pink expresses admiration and gratitude, while yellow roses today carry messages of joy, energy, and sincere friendship.</p>
+                `
+            },
+            story3: {
+                title: "The perfect pairing: Flowers and luxury perfume as a surprise",
+                date: "Ideas · 14 Feb",
+                image: "sliki/image29.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">When you need to create a gift that leaves someone speechless and deeply engages human senses, combining a fresh floral arrangement with a top luxury perfume is an infallible choice.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">The everlasting scent synergy</h4>
+                    <p style="margin-bottom: 12px;">The human brain remembers emotions and memories most strongly through scent. Merging the delicate fragrance of fresh roses or peonies with a signature favorite perfume creates a multisensory experience remembered for a lifetime.</p>
+                `
+            },
+            story4: {
+                title: "Color psychology in floristry: How flowers affect mood",
+                date: "Stories · 10 Jan",
+                image: "sliki/image30.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Colors have a direct impact on our subconscious, emotions, and daily mood. In floristry, choosing the right bouquet colors can radically alter the room's energy.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Energy of warm tones</h4>
+                    <p style="margin-bottom: 12px;">Yellow and orange flowers bring warmth, optimism, and joy, stimulating creativity and social energy.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Peace of cool hues</h4>
+                    <p>Blue, purple, and soft white tones act soothingly, helping reduce stress and creating an oasis of relaxation in your home.</p>
+                `
+            },
+            story5: {
+                title: "Eco-floristry: How to choose plastic-free eco packaging?",
+                date: "Trends · 22 Dec",
+                image: "sliki/image31.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">Sustainability is no longer a temporary trend, but a necessary responsibility. Eco-floristry focuses on completely eliminating plastic foils and replacing them with biodegradable materials.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Natural alternatives</h4>
+                    <p>Using recyclable kraft paper, jute and cotton twine, as well as hand-crafted cardboard boxes without plastic add-ons, enables peak aesthetics with a minimal carbon footprint.</p>
+                `
+            },
+            story6: {
+                title: "History of floral arrangements: From ancient Egypt to modern studios",
+                date: "History · 15 Nov",
+                image: "sliki/image32.avif",
+                text: `
+                    <p style="margin-bottom: 14px;">The art of floral arranging dates back to Ancient Egypt, where sacred flowers were used for religious rituals, royal ceremonies, and palace decoration.</p>
+                    <h4 style="margin: 18px 0 6px 0; color: var(--text);">Evolution through eras</h4>
+                    <p>From Greek and Roman victory wreaths, through the Asian philosophy of Ikebana, up to modern design studios today, flowers have always remained a supreme symbol of elegance and respect.</p>
+                `
+            }
+        }
+    };
+
+    function openBlogModal(articleKey) {
+        const currentLang = localStorage.getItem("florentiaLang") || "mk";
+        const langData = articlesData[currentLang] || articlesData["mk"];
+        const article = langData[articleKey];
+        if (!article) return;
+
+        const modalBody = document.getElementById("modalBodyContent");
+        modalBody.innerHTML = `
+            <img src="${article.image}" alt="${article.title}" style="width: 100%; height: 280px; object-fit: cover; border-radius: var(--radius); margin-bottom: 20px;">
+            <span style="color: var(--primary); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;">${article.date}</span>
+            <h2 style="font-size: 22px; margin-bottom: 15px; color: var(--text);">${article.title}</h2>
+            <div style="line-height: 1.6; font-size: 15px; color: var(--text);">
+                ${article.text}
+            </div>
+        `;
+
+        document.getElementById("blogModal").style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeBlogModal() {
+        document.getElementById("blogModal").style.display = "none";
+        document.body.style.overflow = "";
+    }
+
+    function openBlogModalOnOutside(event) {
+        const modal = document.getElementById("blogModal");
+        if (event.target === modal) {
+            closeBlogModal();
+        }
+    }
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeBlogModal();
+        }
+    });
+</script>
+
+<script src="js/translations.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+</body>
+</html>

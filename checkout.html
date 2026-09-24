@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="mk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-key="pageTitleCheckOut">Кошничка & Наплата | Florentia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="icon" type="image/png" href="sakura.png">
+
+</head>
+<body data-page="checkout">
+
+
+<canvas id="flowerCanvas"></canvas>
+
+
+<div id="loader" class="loader"><div class="loader-inner"><div class="loader-flower">🌸</div></div></div>
+<div id="site-header"></div>
+
+<main>
+    <!-- Странична херо секција -->
+    <section class="page-hero">
+        <div class="container" style="text-align: center; max-width: 700px;">
+            <span class="eyebrow" style="color:var(--primary); font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:1px;" data-key="checkoutEyebrow">Ваша кошничка</span>
+            <h1 data-key="checkoutMainTitle">Завршување на нарачката</h1>
+            <p style="color:var(--muted); font-size:17px; margin-top:8px;" data-key="checkoutMainDesc">Проверете ги вашите производи, внесете податоци за достава и изберете начин на плаќање.</p>
+        </div>
+    </section>
+
+    <!-- Главна содржина на checkout -->
+    <section class="section" style="padding-top: 10px;">
+        <div class="container checkout-grid">
+
+            <!-- ЛЕВА СТРАНА: Податоци за достава и начин на плаќање -->
+            <div>
+                <form id="checkoutForm">
+
+                    <!-- Дел 1: Податоци за достава -->
+                    <div class="checkout-section-box">
+                        <h3 data-key="deliveryDetailsTitle">📍 Податоци за достава во Скопје</h3>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label for="firstName" data-key="labelFirstName">Име</label>
+                                <input type="text" id="firstName" required placeholder="Стефан" data-key="placeholderFirstName" data-i18n-type="placeholder">
+                            </div>
+                            <div>
+                                <label for="lastName" data-key="labelLastName">Презиме</label>
+                                <input type="text" id="lastName" required placeholder="Стефановски" data-key="placeholderLastName" data-i18n-type="placeholder">
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <label for="phone" data-key="labelPhone">Телефон за контакт (за курирот)</label>
+                            <input type="tel" id="phone" required placeholder="+389 70 123 456" data-key="placeholderPhone" data-i18n-type="placeholder">
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <label for="address" data-key="labelAddress">Адреса и број на стан / куќа</label>
+                            <input type="text" id="address" required placeholder="ул. Партизански Одреди бр. 15, к.2 ап.12" data-key="placeholderAddress" data-i18n-type="placeholder">
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <label for="note" data-key="labelNote">Забелешка за нарачката или изненадувањето (опционално)</label>
+                            <textarea id="note" rows="2" placeholder="На пр. Ве молам ѕвонете на врата, станува збор за роденденско изненадување..." data-key="placeholderNote" data-i18n-type="placeholder"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Дел 2: Избор на начин на плаќање -->
+                    <div class="checkout-section-box">
+                        <h3 data-key="paymentMethodTitle">💳 Изберете начин на плаќање</h3>
+
+                        <div class="payment-methods-grid">
+                            <!-- Опција 1: Картичка -->
+                            <label class="payment-method-card selected" id="cardOptionLabel">
+                                <div class="payment-method-header">
+                                    <input type="radio" name="paymentMethod" value="card" checked id="payCard">
+                                    <span data-key="paymentCardOption">Онлајн картичка</span>
+                                </div>
+                                <p data-key="paymentCardDesc">Платете сигурно со Visa или MasterCard.</p>
+                            </label>
+
+                            <!-- Опција 2: Кеш при достава -->
+                            <label class="payment-method-card" id="cashOptionLabel">
+                                <div class="payment-method-header">
+                                    <input type="radio" name="paymentMethod" value="cash" id="payCash">
+                                    <span data-key="paymentCashOption">Готовина при достава</span>
+                                </div>
+                                <p data-key="paymentCashDesc">Платете му на курирот во кеш кога ќе ви стигне букетот.</p>
+                            </label>
+                        </div>
+
+                        <!-- Дополнителни полиња за картичка (се појавуваат само ако е избрано картичка) -->
+                        <div id="cardDetailsContainer" class="card-details-container active">
+                            <div style="margin-bottom: 12px;">
+                                <label for="cardNumber" data-key="labelCardNumber">Број на картичка</label>
+                                <input type="text" id="cardNumber" placeholder="4532 •••• •••• 8890" maxlength="19" data-key="placeholderCardNumber" data-i18n-type="placeholder">
+                            </div>
+                            <div class="card-row">
+                                <div>
+                                    <label for="cardExpiry" data-key="labelCardExpiry">Рок на важење</label>
+                                    <input type="text" id="cardExpiry" placeholder="MM / GG" maxlength="7" data-key="placeholderCardExpiry" data-i18n-type="placeholder">
+                                </div>
+                                <div>
+                                    <label for="cardCvv" data-key="labelCardCvv">CVV код</label>
+                                    <input type="password" id="cardCvv" placeholder="123" maxlength="4" data-key="placeholderCardCvv" data-i18n-type="placeholder">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-dark" style="width: 100%; padding: 14px; font-size: 16px;" data-key="checkoutSubmitBtn">Потврди ја нарачката</button>
+                </form>
+            </div>
+
+            <!-- ДЕСНА СТРАНА: Преглед на кошничката -->
+            <div>
+                <div class="checkout-section-box" style="position: sticky; top: 30px;">
+                    <h3 data-key="cartOverviewTitle">🛍️ Ваши производи во кошничка</h3>
+                    <div id="checkout-cart">
+                        <!-- Тука динамички се вчитуваат производите од main.js кошничката -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<!-- МОДАЛНО ПРОЗОРЧЕ ЗА УСПЕШНО КРЕИРАНА НАРАЧКА -->
+<div id="orderSuccessModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-icon">🌸</div>
+        <h3 data-key="orderSuccessTitle">Успешна нарачка!</h3>
+        <p data-key="orderSuccessDesc">Ви благодариме за довербата. Вашата нарачка е успешно примена и нашиот тим веднаш започнува со подготовка на свежиот букет.</p>
+        <a href="index.html" class="btn btn-dark" style="width: 100%; display: inline-block; text-align: center; box-sizing: border-box;" data-key="orderBackHomeBtn">Назад кон почетна</a>
+    </div>
+</div>
+
+<div id="cookie-banner" class="cookie-banner">
+    <p data-key="cookieText">Користиме колачиња (cookies) за подобро корисничко искуство. Можете да ги прифатите или одбиете.</p>
+    <div class="cookie-actions">
+        <button id="cookie-decline" data-key="cookieDecline">Одбиј</button>
+        <button id="cookie-accept" class="accept" data-key="cookieAccept">Прифати</button>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+
+<!-- Јаваскрипт за контрола на начинот на плаќање и потврда на нарачка -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const payCard = document.getElementById("payCard");
+        const payCash = document.getElementById("payCash");
+        const cardOptionLabel = document.getElementById("cardOptionLabel");
+        const cashOptionLabel = document.getElementById("cashOptionLabel");
+        const cardDetailsContainer = document.getElementById("cardDetailsContainer");
+
+        const checkoutForm = document.getElementById("checkoutForm");
+        const orderSuccessModal = document.getElementById("orderSuccessModal");
+
+        // Динамично менување на стиловите и прикажување на полињата за картичка
+        function updatePaymentUI() {
+            if (payCard.checked) {
+                cardOptionLabel.classList.add("selected");
+                cashOptionLabel.classList.remove("selected");
+                cardDetailsContainer.classList.add("active");
+
+                // Постави ги полињата за картичка како задолжителни
+                document.getElementById("cardNumber").setAttribute("required", "true");
+                document.getElementById("cardExpiry").setAttribute("required", "true");
+                document.getElementById("cardCvv").setAttribute("required", "true");
+            } else {
+                cashOptionLabel.classList.add("selected");
+                cardOptionLabel.classList.remove("selected");
+                cardDetailsContainer.classList.remove("active");
+
+                // Отстрани ја задолжителноста кога се плаќа со кеш
+                document.getElementById("cardNumber").removeAttribute("required");
+                document.getElementById("cardExpiry").removeAttribute("required");
+                document.getElementById("cardCvv").removeAttribute("required");
+            }
+        }
+
+        if (payCard && payCash) {
+            payCard.addEventListener("change", updatePaymentUI);
+            payCash.addEventListener("change", updatePaymentUI);
+        }
+
+        // Поднесување на формата
+        if (checkoutForm) {
+            checkoutForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                // Проверка дали кошничката е празна пред потврда
+                let cart = JSON.parse(localStorage.getItem("florentiaCart")) || [];
+                if (cart.length === 0) {
+                    alert("Вашата кошничка е празна!");
+                    return;
+                }
+
+                // Испразни ја кошничката од меморијата
+                localStorage.removeItem("florentiaCart");
+
+                // Прикажи го успешното модално прозорче
+                if (orderSuccessModal) {
+                    orderSuccessModal.classList.add("active");
+                }
+            });
+        }
+    });
+</script>
+
+
+<!-- Копче за враќање на врвот -->
+<button id="scrollToTopBtn" class="scroll-to-top" title="На врв" data-key="scrollToTopTitle" data-i18n-type="title">↑</button>
+
+<script src="js/translations.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script src="js/validation.js"></script>
+</body>
+</html>
